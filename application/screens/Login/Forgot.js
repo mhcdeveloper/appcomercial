@@ -35,10 +35,9 @@ export default Forgot = ({ navigation }) => {
                 </Container>
                 <ContainerFooter>
                     <Btn
-                        padding="20px"
+                        padding="18px"
                         font="28px"
                         label="ENTRAR"
-                        // onSubmit={() => handleSubmit()}
                         backgroundColor={Colors.primary}
                     />
                     <Title onPress={() => navigation.goBack()} top="10px" bottom="10px" color={Colors.white}>Ir para Login</Title>

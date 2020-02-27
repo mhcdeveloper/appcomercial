@@ -171,7 +171,7 @@ export const InputText = styled.TextInput`
 //ESTILOS BUTTONS GLOBAIS
 export const Button = styled.TouchableOpacity`
     width: 250px;
-    border-radius: 35px;
+    border-radius: 40px;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     padding: ${props => props.padding ? props.padding : '8px'};
     margin: 5px;    

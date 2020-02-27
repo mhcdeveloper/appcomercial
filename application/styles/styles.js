@@ -18,10 +18,6 @@ const styles = StyleSheet.create({
         height,
         backgroundColor: Colors.white,
     },
-    logo: {
-        width: '82%',
-        height: 105,
-    },
     containerModal: {
         flex: 1,
         backgroundColor: Colors.white,
