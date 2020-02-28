@@ -7,6 +7,7 @@ import Logo from '../../components/Logo';
 import Btn from '../../components/Buttons';
 import Colors from '../../styles/Colors';
 import { Title, Container, ContainerFooter, ContainerScroll } from '../../styles';
+import Restore from '../../components/Forms/Restore';
 
 export default Forgot = ({ navigation }) => {
     const [email, setEmail] = useState();
@@ -32,14 +33,9 @@ export default Forgot = ({ navigation }) => {
                     marginRight="10%"
                     backgroundColor={Colors.transparent}>
                     <Title color={Colors.white} bottom="10px">Recuperar Senha</Title>
+                    <Restore />
                 </Container>
                 <ContainerFooter>
-                    <Btn
-                        padding="18px"
-                        font="28px"
-                        label="ENTRAR"
-                        backgroundColor={Colors.primary}
-                    />
                     <Title onPress={() => navigation.goBack()} top="10px" bottom="10px" color={Colors.white}>Ir para Login</Title>
                 </ContainerFooter>
             </ContainerScroll>

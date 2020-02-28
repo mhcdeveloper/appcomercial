@@ -5,7 +5,7 @@ import Btn from '../Buttons';
 import Input from '../Input';
 import Colors from '../../styles/Colors';
 
-export default function SignIn() {
+export default function Restore() {
   const formRef = useRef(null);
 
   function handleSubmit(data) {
@@ -21,19 +21,11 @@ export default function SignIn() {
         icon="user"
         color={Colors.white}
         placeholderTextColor={Colors.white}
-      />
-      <Input
-        name="password"
-        type="password"
-        placeholder="Senha"
-        icon="lock"
-        color={Colors.white}
-        placeholderTextColor={Colors.white}
-      />
+      />      
       <Btn
         padding="18px"
         font="28px"
-        label="ENTRAR"
+        label="ENVIAR"
         onSubmit={() => formRef.current.submitForm()}
         backgroundColor={Colors.primary}
       />
