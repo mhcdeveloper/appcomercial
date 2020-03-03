@@ -8,6 +8,7 @@ import Logo from '../../components/Logo';
 import Colors from '../../styles/Colors';
 import { Title, Container, ContainerFooter, ContainerScroll } from '../../styles';
 import SignIn from '../../components/Forms/SignIn';
+import Digital from '../../components/Modals/Digital';
 
 const Login = ({ }) => {
     const { navigate } = useNavigation();
@@ -33,6 +34,7 @@ const Login = ({ }) => {
                 <ContainerFooter>
                     <Title onPress={() => navigate('Forgot')} top="10px" bottom="10px" color={Colors.white}>Esqueceu sua senha ?</Title>
                 </ContainerFooter>
+                <Digital />
             </ContainerScroll>
         </ImageBackground>
     )

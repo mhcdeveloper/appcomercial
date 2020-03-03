@@ -10,13 +10,17 @@ export default {
     darker: '#111',
     dark: '#333',
     regular: '#666',
+    hight: '#f8f8f8',
     light: '#C0C0C0',
+    gray: '#f1f1f1',
     lighter: '#eee',
     white: '#FFF',
     brown: 'brown',
     lighterYellow: '#FFEB3B',
     green: '#00ff00',
     laranja: '#F57C00',
+    black: "#000000",
+    link: '#2196F3',
 
     transparent: 'rgba(0, 0, 0, 0)',
 }

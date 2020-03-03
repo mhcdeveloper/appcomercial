@@ -32,12 +32,8 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.1)',
     },
     containerHeader: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
         backgroundColor: Colors.primary,
-        borderBottomLeftRadius: 35
+        borderBottomLeftRadius: 45
     },
     containerBlack: { 
         position: 'absolute', 

@@ -4,12 +4,14 @@ import { Form } from '@unform/mobile';
 import Btn from '../Buttons';
 import Input from '../Input';
 import Colors from '../../styles/Colors';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SignIn() {
   const formRef = useRef(null);
+  const { navigate } = useNavigation();
 
   function handleSubmit(data) {
-    console.log(data);
+    navigate('Home');  
   }
 
   return (

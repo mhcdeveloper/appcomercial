@@ -106,6 +106,13 @@ export const ContainerModal = styled.View`
     margin-bottom: 150px
 `;
 
+export const ContainerWrapper = styled.View`
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const Hr = styled.View`
     border-bottom-width: 0.5;
     border-color: ${props => Colors.lighter};
@@ -130,7 +137,7 @@ export const Card = styled.View`
 export const Title = styled.Text`
     font-size: ${props => props.font ? props.font : '18px'};
     text-align: ${props => props.align ? props.align : 'center'};
-    font-weight: ${props => props.weight ? props.weight : '400'};
+    font-weight: ${props => props.weight ? props.weight : '300'};
     color: ${props => props.color ? props.color : Colors.primary};
     padding-left: ${props => props.left ? props.left : '0px'};
     padding-right: ${props => props.right ? props.right : '0px'};
