@@ -113,6 +113,12 @@ export const ContainerWrapper = styled.View`
     justify-content: center;
 `;
 
+export const ContainerPagination = styled.View`
+    flex-direction: row;
+    align-items: center;    
+    padding: 5px
+`;
+
 export const Hr = styled.View`
     border-bottom-width: 0.5;
     border-color: ${props => Colors.lighter};
@@ -182,4 +188,13 @@ export const Button = styled.TouchableOpacity`
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     padding: ${props => props.padding ? props.padding : '8px'};
     margin: 5px;    
+`;
+
+//ESTILOS DE INPUTS
+export const Input = styled.TextInput`
+    background-color: white;
+    border-width: 1;
+    border-color: ${props => props.borderColor ? props.borderColor : Colors.lighter};
+    border-radius: 25px;
+    padding: 10px;
 `;

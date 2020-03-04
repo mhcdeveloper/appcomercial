@@ -6,30 +6,21 @@ import { LOGO_EVOLOG_MIN } from '../../assets/consts';
 import styles from '../../styles/styles';
 import { Title, ContainerRow, ContainerScroll } from '../../styles';
 import Colors from '../../styles/Colors';
+import { useNavigation } from '@react-navigation/native';
 
-export default Header = ({ setMenu }) => {
+export default Header = ({ setMenu, showBack }) => {
+    const { goBack } = useNavigation();
     const [show, setShow] = useState(true);
     const [cliente, setCliente] = useState(false);
     const [clientes, setClientes] = useState(false);
 
     async function searchCliente() {
-        setTimeout(() => {
-            let clientes = [
-                { id: 1, nome: 'Clarice Bee Perera' },
-                { id: 2, nome: 'Plinio Luiz Basso' },
-                { id: 3, nome: 'Adair José Tomazi' },
-                { id: 4, nome: 'Jacy Paulo Scanagatta' },
-                { id: 5, nome: 'Clarice Bee Perera' },
-                { id: 6, nome: 'Plinio Luiz Basso' },
-                { id: 7, nome: 'Adair José Tomazi' },
-                { id: 8, nome: 'Jacy Paulo Scanagatta' },
-                { id: 9, nome: 'Clarice Bee Perera' },
-                { id: 10, nome: 'Plinio Luiz Basso' },
-                { id: 11, nome: 'Adair José Tomazi' },
-                { id: 12, nome: 'Jacy Paulo Scanagatta' },
-            ]
-            setClientes(clientes);
-        }, 3000);
+        let clientes = [
+            { id: 1, nome: 'Clarice Bee Perera' },
+            { id: 2, nome: 'Plinio Luiz Basso' },
+            { id: 3, nome: 'Adair José Tomazi' },
+        ]
+        setClientes(clientes);
     }
 
     async function handleCliente(cliente) {
@@ -46,11 +37,21 @@ export default Header = ({ setMenu }) => {
     return (
         <>
             <View style={styles.containerHeader}>
-                <Image source={LOGO_EVOLOG_MIN} style={custom.logo} />
+                <ContainerRow justifyContent="space-between">
+                    <Image source={LOGO_EVOLOG_MIN} style={custom.logo} />
+                    {showBack &&
+                        <TouchableOpacity
+                            onPress={() => goBack()}
+                            style={{ paddingTop: 25, paddingRight: 15 }}
+                            activeOpacity={0.7}>
+                            <Icon name="arrow-circle-left" size={45} color={Colors.white} />
+                        </TouchableOpacity>
+                    }
+                </ContainerRow>
                 {show &&
                     <>
                         <View>
-                            <Title font="25px" align="left" left="30px" color={Colors.white} top="35px" bottom="20px" weight="500">Olá, Matheus Oliveira</Title>
+                            <Title font="25px" align="left" left="30px" color={Colors.white} top="20px" bottom="20px" weight="500">Olá, Matheus Oliveira</Title>
                         </View>
                         {!cliente
                             ?
@@ -109,6 +110,7 @@ export default Header = ({ setMenu }) => {
                             {clientes.map((cli, index) => {
                                 return (
                                     <TouchableOpacity
+                                        key={index}
                                         onPress={() => handleCliente(cli)}
                                         style={custom.btnSelectCliente}
                                         activeOpacity={0.7}>

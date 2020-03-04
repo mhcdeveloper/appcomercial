@@ -33,7 +33,7 @@ export default function SignIn() {
         placeholderTextColor={Colors.white}
       />
       <Btn
-        padding="18px"
+        padding="16px"
         font="28px"
         label="ENTRAR"
         onSubmit={() => formRef.current.submitForm()}

@@ -23,7 +23,7 @@ export default function Restore() {
         placeholderTextColor={Colors.white}
       />      
       <Btn
-        padding="18px"
+        padding="16px"
         font="28px"
         label="ENVIAR"
         onSubmit={() => formRef.current.submitForm()}

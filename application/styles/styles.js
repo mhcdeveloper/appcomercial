@@ -33,7 +33,16 @@ const styles = StyleSheet.create({
     },
     containerHeader: {
         backgroundColor: Colors.primary,
-        borderBottomLeftRadius: 45
+        borderBottomLeftRadius: 45,
+        elevation: 8,
+    },
+    containerRowPagination: {
+        backgroundColor: Colors.regular,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        borderBottomLeftRadius: 45,
+        borderTopLeftRadius: 45,
+        marginTop: 50,
     },
     containerBlack: { 
         position: 'absolute', 
