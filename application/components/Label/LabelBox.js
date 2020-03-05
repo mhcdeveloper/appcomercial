@@ -5,11 +5,11 @@ import Colors from '../../styles/Colors';
 import { Title } from '../../styles';
 import { width } from '../../utils';
 
-export default LabelBox = ({ label, total }) => {
+export default LabelBox = ({ item }) => {
     return (
         <View style={styles.container}>
-            <Title font="14px" color={Colors.regular}>{label}</Title>
-            <Title weight="600" top="5px" font="30px" color={Colors.primary}>{total}</Title>
+            <Title font="14px" color={Colors.regular}>{item.label}</Title>
+            <Title weight="600" top="5px" font="30px" color={Colors.primary}>{item.total}</Title>
         </View>
     )
 }
@@ -17,7 +17,7 @@ export default LabelBox = ({ label, total }) => {
 const styles = StyleSheet.create({
     container: {
         width: width / 3.3,
-        minHeight: 120,
+        minHeight: 110,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 15,

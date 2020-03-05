@@ -34,7 +34,7 @@ const Login = ({ }) => {
                 <ContainerFooter>
                     <Title onPress={() => navigate('Forgot')} top="10px" bottom="10px" color={Colors.white}>Esqueceu sua senha ?</Title>
                 </ContainerFooter>
-                <Digital />
+                {/* <Digital /> */}
             </ContainerScroll>
         </ImageBackground>
     )

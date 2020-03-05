@@ -5,19 +5,22 @@ import Btn from '../Buttons';
 import Input from '../Input';
 import Colors from '../../styles/Colors';
 import { useNavigation } from '@react-navigation/native';
+import { login } from '../../services/loginService';
 
 export default function SignIn() {
   const formRef = useRef(null);
   const { navigate } = useNavigation();
 
-  function handleSubmit(data) {
-    navigate('Home');  
+  async function handleSubmit(data) {
+    await login(data).then(res => {
+      navigate('Home');
+    })
   }
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Input
-        name="email"
+        name="dsemalog"
         type="email"
         placeholder="E-mail"
         icon="user"
@@ -25,9 +28,10 @@ export default function SignIn() {
         placeholderTextColor={Colors.white}
       />
       <Input
-        name="password"
+        name="dssenha"
         type="password"
         placeholder="Senha"
+        secureTextEntry={true}
         icon="lock"
         color={Colors.white}
         placeholderTextColor={Colors.white}

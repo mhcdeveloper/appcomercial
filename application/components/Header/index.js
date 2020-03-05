@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { View, Image, TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useNavigation } from '@react-navigation/native';
 
 import { LOGO_EVOLOG_MIN } from '../../assets/consts';
 import styles from '../../styles/styles';
-import { Title, ContainerRow, ContainerScroll } from '../../styles';
+import { Title, ContainerRow } from '../../styles';
 import Colors from '../../styles/Colors';
-import { useNavigation } from '@react-navigation/native';
+import { setCliente, handleClose } from '../../store/Actions/HeaderActions';
 
 export default Header = ({ setMenu, showBack }) => {
+    const header = useSelector(state => state.header);
+    const dispatch = useDispatch();
+
     const { goBack } = useNavigation();
-    const [show, setShow] = useState(true);
-    const [cliente, setCliente] = useState(false);
     const [clientes, setClientes] = useState(false);
 
     async function searchCliente() {
@@ -24,16 +27,15 @@ export default Header = ({ setMenu, showBack }) => {
     }
 
     async function handleCliente(cliente) {
-        setCliente(cliente);
+        dispatch(setCliente(cliente))
         setMenu(true);
     }
 
     function changeCliente() {
-        setCliente(false);
+        dispatch(setCliente(false));
         setClientes(false);
         setMenu(false);
     }
-
     return (
         <>
             <View style={styles.containerHeader}>
@@ -48,12 +50,12 @@ export default Header = ({ setMenu, showBack }) => {
                         </TouchableOpacity>
                     }
                 </ContainerRow>
-                {show &&
+                {header.close &&
                     <>
                         <View>
                             <Title font="25px" align="left" left="30px" color={Colors.white} top="20px" bottom="20px" weight="500">Olá, Matheus Oliveira</Title>
                         </View>
-                        {!cliente
+                        {!header.cliente
                             ?
                             <View>
                                 <Title font="20px" align="left" left="30px" color={Colors.white} top="5px" bottom="35px">Para iniciar selecione seu cliente</Title>
@@ -62,28 +64,30 @@ export default Header = ({ setMenu, showBack }) => {
                             <ContainerRow>
                                 <View>
                                     <Title font={20} align="left" left="30px" color={Colors.white} weight="500">Cliente:</Title>
-                                    <Title font={20} align="left" left="30px" color={Colors.white}>{cliente.nome}</Title>
+                                    <Title font={20} align="left" left="30px" color={Colors.white}>{header.cliente.nome}</Title>
                                 </View>
-                                <TouchableOpacity
-                                    style={custom.btnCliente}
-                                    onPress={() => changeCliente()}
-                                    activeOpacity={0.7}>
-                                    <Title>Trocar Cliente</Title>
-                                </TouchableOpacity>
+                                {setMenu &&
+                                    <TouchableOpacity
+                                        style={custom.btnCliente}
+                                        onPress={() => changeCliente()}
+                                        activeOpacity={0.7}>
+                                        <Title>Trocar Cliente</Title>
+                                    </TouchableOpacity>
+                                }
                             </ContainerRow>
                         }
                     </>
                 }
-                {cliente &&
+                {header.cliente &&
                     <TouchableOpacity
                         activeOpacity={0.7}
                         style={custom.btn}
-                        onPress={() => setShow(!show)}>
-                        <Icon name={show ? 'sort-up' : 'sort-down'} size={35} color={Colors.white} />
+                        onPress={() => dispatch(handleClose())}>
+                        <Icon name={header.close ? 'sort-up' : 'sort-down'} size={35} color={Colors.white} />
                     </TouchableOpacity>
                 }
             </View>
-            {!cliente &&
+            {!header.cliente &&
                 <View style={custom.search}>
                     <ContainerRow
                         justifyContent="flex-start"

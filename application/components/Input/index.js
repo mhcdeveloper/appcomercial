@@ -40,7 +40,7 @@ function Input({ color, icon, name, label, ...rest }) {
                 borderBottomColor={color}
                 justifyContent="flex-start">
                 {icon && <Icon name={icon} size={28} color={color} style={{ paddingLeft: 20, paddingRight: 10 }} />}
-                <TextInput ref={inputRef} defaultValue={defaultValue} {...rest} style={{ fontSize: 18, color }} />
+                <TextInput ref={inputRef} defaultValue={defaultValue} {...rest} style={{ width: '80%', fontSize: 18, color }} />
             </ContainerRow>
         </>
     )
