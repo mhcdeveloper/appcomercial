@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Modal from "react-native-modal";
+import FingerprintScanner from 'react-native-fingerprint-scanner';
 
-import { ContainerRow, Title, ContainerCenter } from '../../styles';
+import { ContainerRow, Title, ContainerCenter, Content } from '../../styles';
 import Colors from '../../styles/Colors';
 
 export default Digital = ({ }) => {
+    const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
     useEffect(() => {
         setShow(true)
+        FingerprintScanner
+            .authenticate({ description: 'Autenticar com biometria, Posicione o dedo no leitor' })
+            .then(() => {
+                setLoading(true)
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
     }, [])
     return (
         <Modal
@@ -26,11 +36,20 @@ export default Digital = ({ }) => {
                     <Icon name="fingerprint" size={40} color={Colors.light} />
                     <Title font="19px" left="15px" color={Colors.regular}>Use sua impressão digital</Title>
                 </ContainerRow>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => setShow(false)}>
-                    <Title color={Colors.link}>Digitar e-mail e senha</Title>
-                </TouchableOpacity>
+                {loading
+                    ?
+                    <Content
+                        marginTop="20px"
+                        backgroundColor={Colors.transparent}>
+                        <ActivityIndicator size="large" color={Colors.white} />
+                    </Content>
+                    :
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => setShow(false)}>
+                        <Title color={Colors.link}>Digitar e-mail e senha</Title>
+                    </TouchableOpacity>
+                }
             </ContainerCenter>
         </Modal>
     )

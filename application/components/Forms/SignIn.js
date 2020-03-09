@@ -1,19 +1,45 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Form } from '@unform/mobile';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
 
 import Btn from '../Buttons';
 import Input from '../Input';
 import Colors from '../../styles/Colors';
 import { useNavigation } from '@react-navigation/native';
-import { login } from '../../services/loginService';
+import { login, loginWithDigital } from '../../services/loginService';
+import { ActivityIndicator } from 'react-native';
+import { Content } from '../../styles';
+import { storeUserInfo, getUserInfo } from '../../utils';
 
 export default function SignIn() {
+  const [loading, setLoading] = useState(false);
   const formRef = useRef(null);
   const { navigate } = useNavigation();
 
+  useEffect(() => {
+    FingerprintScanner
+      .authenticate({ description: 'Autenticar com biometria, Posicione o dedo no leitor' })
+      .then(async () => {
+        alert('entro')
+        setLoading(true)
+        let user = await getUserInfo();            
+        await login(user).then(_ => {
+          alert('2')
+          setLoading(false);
+          navigate('Home');
+        }).catch(err => setLoading(false))
+      })
+      .catch((error) => {
+        setLoading(false);
+        alert(error.message);
+      });
+  });
+
   async function handleSubmit(data) {
+    setLoading(true);
     await login(data).then(res => {
-      navigate('Home');
+      setLoading(false);
+      storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
     })
   }
 
@@ -36,13 +62,22 @@ export default function SignIn() {
         color={Colors.white}
         placeholderTextColor={Colors.white}
       />
-      <Btn
-        padding="16px"
-        font="28px"
-        label="ENTRAR"
-        onSubmit={() => formRef.current.submitForm()}
-        backgroundColor={Colors.primary}
-      />
+      {loading
+        ?
+        <Content
+          marginTop="20px"
+          backgroundColor={Colors.transparent}>
+          <ActivityIndicator size="large" color={Colors.white} />
+        </Content>
+        :
+        <Btn
+          padding="16px"
+          font="28px"
+          label="ENTRAR"
+          onSubmit={() => formRef.current.submitForm()}
+          backgroundColor={Colors.primary}
+        />
+      }
     </Form>
   );
 }
