@@ -9,7 +9,7 @@ import Colors from '../../styles/Colors';
 import { Title, Container, ContainerFooter, ContainerScroll } from '../../styles';
 import SignIn from '../../components/Forms/SignIn';
 
-const Login = ({ }) => {
+const Login = () => {
     const { navigate } = useNavigation();
     return (
         <ImageBackground
@@ -18,10 +18,10 @@ const Login = ({ }) => {
             imageStyle={{
                 resizeMode: 'stretch',
             }}>
+            <StatusBar hidden />
             <ContainerScroll
                 contentContainerStyle={{ flex: 1 }}
                 backgroundColor={Colors.transparent}>
-                <StatusBar hidden />
                 <Logo />
                 <Container
                     marginLeft="10%"

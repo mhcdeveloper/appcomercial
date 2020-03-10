@@ -13,8 +13,8 @@ export default Welcome = ({ }) => {
         setTimeout(() => {
             getUser().then(user => {
                 if (user) {
-                    // navigate('Home');
-                    navigate('Login');
+                    navigate('Home');
+                    // navigate('Login');
                 } else {
                     navigate('Login');
                 }

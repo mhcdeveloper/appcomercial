@@ -49,3 +49,22 @@ export const forgotPassword = async (user) => {
         }
     });
 }
+
+export const filtrarClientes = async (name) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const source = CancelToken.source();
+            let response = null;
+            setTimeout(() => {
+                if (response === null) {
+                    source.cancel();
+                }
+            }, 14000);
+            response = await api.post('/api/filtro/clientes', { parameter: name, remetrans: true }).then(async res => {
+                resolve(res.data);
+            })
+        } catch (error) {
+            reject(error);
+        }
+    });
+}

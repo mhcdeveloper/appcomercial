@@ -16,31 +16,34 @@ export default function SignIn() {
   const formRef = useRef(null);
   const { navigate } = useNavigation();
 
-  useEffect(() => {
-    FingerprintScanner
-      .authenticate({ description: 'Autenticar com biometria, Posicione o dedo no leitor' })
-      .then(async () => {
-        alert('entro')
-        setLoading(true)
-        let user = await getUserInfo();            
-        await login(user).then(_ => {
-          alert('2')
+  useEffect(async () => {
+    loginDigital();
+  }, []);
+
+  async function loginDigital() {
+    let user = await getUserInfo();
+    if (user) {
+      FingerprintScanner
+        .authenticate({ description: 'Autenticar com biometria, Posicione o dedo no leitor' })
+        .then(async () => {
+          setLoading(true)
+          await login(user).then(_ => {
+            setLoading(false);
+            navigate('Home');
+          }).catch(err => setLoading(false))
+        })
+        .catch((error) => {
           setLoading(false);
-          navigate('Home');
-        }).catch(err => setLoading(false))
-      })
-      .catch((error) => {
-        setLoading(false);
-        alert(error.message);
-      });
-  });
+        });
+    }
+  }
 
   async function handleSubmit(data) {
     setLoading(true);
     await login(data).then(res => {
       setLoading(false);
       storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
-    })
+    }).catch(_ => setLoading(false))
   }
 
   return (
@@ -49,6 +52,7 @@ export default function SignIn() {
         name="dsemalog"
         type="email"
         placeholder="E-mail"
+        autoCapitalize="none"
         icon="user"
         color={Colors.white}
         placeholderTextColor={Colors.white}

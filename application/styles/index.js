@@ -5,6 +5,11 @@ import Colors from './Colors';
 const { width, hight } = Dimensions.get('window');
 
 //ESTILOS CONTAINERS GLOBAIS
+export const SafeContainer = styled.SafeAreaView`
+    flex: 1;
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.transparent};    
+`;
+
 export const Container = styled.View`
     flex: 1;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.white};

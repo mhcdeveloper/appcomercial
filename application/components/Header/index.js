@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Image, TouchableOpacity, TextInput, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,9 @@ import styles from '../../styles/styles';
 import { Title, ContainerRow } from '../../styles';
 import Colors from '../../styles/Colors';
 import { setCliente, handleClose } from '../../store/Actions/HeaderActions';
+import { getUser } from '../../utils';
+import useDebounce from '../Input/useDebounce';
+import { filtrarClientes } from '../../services/loginService';
 
 export default Header = ({ setMenu, showBack }) => {
     const header = useSelector(state => state.header);
@@ -16,14 +19,32 @@ export default Header = ({ setMenu, showBack }) => {
 
     const { goBack } = useNavigation();
     const [clientes, setClientes] = useState(false);
+    const [loadingSearch, setLoadingSearch] = useState(false);
+    const [user, setUser] = useState(false);
+    const [name, setName] = useState('');
+
+    const debouncedSearchCliente = useDebounce(name, 200);
+
+    useEffect(() => {
+        getInfo();
+        if (debouncedSearchCliente) {
+            searchCliente();
+        } else {
+            setClientes(false)
+        }
+    }, [debouncedSearchCliente])
+
+    async function getInfo() {
+        let user = await getUser();
+        setUser(user);
+    }
 
     async function searchCliente() {
-        let clientes = [
-            { id: 1, nome: 'Clarice Bee Perera' },
-            { id: 2, nome: 'Plinio Luiz Basso' },
-            { id: 3, nome: 'Adair José Tomazi' },
-        ]
-        setClientes(clientes);
+        setLoadingSearch(true);
+        filtrarClientes(name).then(clientes => {
+            setLoadingSearch(false);
+            setClientes(clientes)
+        });
     }
 
     async function handleCliente(cliente) {
@@ -53,7 +74,7 @@ export default Header = ({ setMenu, showBack }) => {
                 {header.close &&
                     <>
                         <View>
-                            <Title font="25px" align="left" left="30px" color={Colors.white} top="20px" bottom="20px" weight="500">Olá, Matheus Oliveira</Title>
+                            <Title font="25px" align="left" left="30px" color={Colors.white} top="20px" bottom="20px" weight="500">Olá, {user.NMUSUARI}</Title>
                         </View>
                         {!header.cliente
                             ?
@@ -62,9 +83,9 @@ export default Header = ({ setMenu, showBack }) => {
                             </View>
                             :
                             <ContainerRow>
-                                <View>
+                                <View style={{ width: '63%' }}>
                                     <Title font={20} align="left" left="30px" color={Colors.white} weight="500">Cliente:</Title>
-                                    <Title font={20} align="left" left="30px" color={Colors.white}>{header.cliente.nome}</Title>
+                                    <Title font={20} align="left" left="30px" color={Colors.white}>{header.cliente.nmclient}</Title>
                                 </View>
                                 {setMenu &&
                                     <TouchableOpacity
@@ -104,24 +125,36 @@ export default Header = ({ setMenu, showBack }) => {
                         elevation={10}
                         borderColor={Colors.light}
                     >
-                        <Icon name="search" size={28} color={Colors.regular} style={custom.icon} />
-                        <TextInput style={custom.inputText} placeholder="Procurar o cliente" onChangeText={(nome) => searchCliente(nome)} />
+                        {loadingSearch
+                            ?
+                            <ActivityIndicator size="large" color={Colors.primary} />
+                            :
+                            <Icon name="search" size={28} color={Colors.regular} style={custom.icon} />
+                        }
+                        <TextInput
+                            style={custom.inputText}
+                            placeholder="Procurar o cliente"
+                            onChangeText={(nome) => setName(nome)} />
                     </ContainerRow>
                     {clientes &&
                         <ScrollView
                             showsVerticalScrollIndicator={false}
                             style={custom.scrollClientes}>
-                            {clientes.map((cli, index) => {
-                                return (
-                                    <TouchableOpacity
-                                        key={index}
-                                        onPress={() => handleCliente(cli)}
-                                        style={custom.btnSelectCliente}
-                                        activeOpacity={0.7}>
-                                        <Title key={index} align="left" color={Colors.regular}>{cli.nome}</Title>
-                                    </TouchableOpacity>
-                                )
-                            })}
+                            {clientes.length > 0 ?
+                                clientes.map((cli, index) => {
+                                    return (
+                                        <TouchableOpacity
+                                            key={index}
+                                            onPress={() => handleCliente(cli)}
+                                            style={custom.btnSelectCliente}
+                                            activeOpacity={0.7}>
+                                            <Title key={index} align="left" color={Colors.regular}>{cli.text}</Title>
+                                        </TouchableOpacity>
+                                    )
+                                })
+                                :
+                                <Title top={30} color={Colors.light}>Nenhum cliente encontrado</Title>
+                            }
                         </ScrollView>
                     }
                 </View>
@@ -166,6 +199,7 @@ const custom = StyleSheet.create({
         marginTop: 10
     },
     btnCliente: {
+        width: '36%',
         backgroundColor: Colors.white,
         padding: 5,
         paddingHorizontal: 10,

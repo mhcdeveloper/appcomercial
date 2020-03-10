@@ -40,7 +40,7 @@ export const storeUser = async (user) => {
 //Responsavel por gravar o usuario para utilizar a digital
 export const storeUserInfo = async (user) => {
     try {
-        await AsyncStorage.setItem(USER_KEY, user)
+        await AsyncStorage.setItem(USER_KEY_DIGITAL, user)
     } catch (e) { }
 }
 
