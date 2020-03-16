@@ -6,7 +6,7 @@ import styles from '../../styles/styles';
 import Logo from '../../components/Logo';
 import Btn from '../../components/Buttons';
 import Colors from '../../styles/Colors';
-import { Title, Container, ContainerFooter, ContainerScroll } from '../../styles';
+import { Title, Container, ContainerFooter, ContainerScroll, SafeContainer } from '../../styles';
 import Restore from '../../components/Forms/Restore';
 
 export default Forgot = ({ navigation }) => {
@@ -23,22 +23,24 @@ export default Forgot = ({ navigation }) => {
             imageStyle={{
                 resizeMode: 'stretch',
             }}>
-            <ContainerScroll
-                contentContainerStyle={{ flex: 1 }}
-                backgroundColor={Colors.transparent}>
-                <StatusBar hidden />
-                <Logo />
-                <Container
-                    marginLeft="10%"
-                    marginRight="10%"
+            <SafeContainer>
+                <ContainerScroll
+                    contentContainerStyle={{ flex: 1 }}
                     backgroundColor={Colors.transparent}>
-                    <Title color={Colors.white} bottom="10px">Recuperar Senha</Title>
-                    <Restore />
-                </Container>
-                <ContainerFooter>
-                    <Title onPress={() => navigation.goBack()} top="10px" bottom="10px" color={Colors.white}>Ir para Login</Title>
-                </ContainerFooter>
-            </ContainerScroll>
+                    <StatusBar hidden />
+                    <Logo />
+                    <Container
+                        marginLeft="10%"
+                        marginRight="10%"
+                        backgroundColor={Colors.transparent}>
+                        <Title color={Colors.white} bottom="10px">Recuperar Senha</Title>
+                        <Restore />
+                    </Container>
+                    <ContainerFooter>
+                        <Title onPress={() => navigation.goBack()} top="10px" bottom="10px" color={Colors.white}>Ir para Login</Title>
+                    </ContainerFooter>
+                </ContainerScroll>
+            </SafeContainer>
         </ImageBackground>
     )
 }
