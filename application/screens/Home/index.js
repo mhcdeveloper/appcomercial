@@ -25,7 +25,7 @@ const menus = [
         }
     },
     { icon: 'file-alt', label: 'AG Estoque' },
-    { icon: 'truck-loading', label: 'Performance de Entrega' },
+    { icon: 'truck-loading', label: 'Performance de Entrega', rota: 'PerformanceEntrega' },
     { icon: 'chart-bar', label: 'Devolução' },
     { icon: 'chart-line', label: 'Histórico de Vendas' },
     { icon: 'chart-bar', label: 'NPS', rota: 'Nps' },

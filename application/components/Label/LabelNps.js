@@ -1,20 +1,25 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
 import Colors from '../../styles/Colors';
 import { Title } from '../../styles';
 import { width } from '../../utils';
+import { useNavigation } from '@react-navigation/native';
 
 export default LabelNps = ({ item }) => {
+    const { navigate } = useNavigation();
     return (
-        <View style={[styles.container, { backgroundColor: item.backgroundColor }]}>
+        <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => navigate('Relatorio', { item })} 
+            style={[styles.container, { backgroundColor: item.backgroundColor }]}>
             <View style={styles.containerTotal}>
                 <Title weight="600" top="5px" font="55px" color={Colors.white}>{item.total}</Title>
             </View>
             <View style={styles.containerLabel}>
                 <Title bottom="5px" font="14px" color={Colors.regular}>{item.label}</Title>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

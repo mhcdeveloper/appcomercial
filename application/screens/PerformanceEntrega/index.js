@@ -5,20 +5,20 @@ import { ContainerScroll, Title, Hr, ContainerWrapper, Container } from '../../s
 import Header from '../../components/Header';
 import Colors from '../../styles/Colors';
 import LabelBox from '../../components/Label/LabelBox';
-import SpeedoMeter from '../../components/Charts/SpeedoMeter';
 import LabelNps from '../../components/Label/LabelNps';
 import { getNps } from '../../services';
 import Loading from '../../components/Loading';
+import PieCharts from '../../components/Charts/PieCharts';
 
-export default Nps = ({ }) => {
+export default PerformanceEntrega = ({ }) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        nps();
+        performanceEntrega();
     }, [])
 
-    function nps() {
+    function performanceEntrega() {
         setLoading(true);
         getNps().then(nps => {
             console.log(nps)
@@ -31,9 +31,9 @@ export default Nps = ({ }) => {
                         { label: 'NPS respondidas vs. Entregas', total: `${npsVsEntregue}%` },
                     ],
                     nps: [
-                        { label: 'Detratores', total: detratores, backgroundColor: '#E64C65', type: 1 },
-                        { label: 'Neutros', total: neutros, backgroundColor: '#FCB150', type: 2 },
-                        { label: 'Promotores', total: promotores, backgroundColor: '#05A802', type: 3 },
+                        { label: 'Antecipado', total: detratores, backgroundColor: '#016DD2', type: 1 },
+                        { label: 'Prazo', total: neutros, backgroundColor: '#05A802', type: 2 },
+                        { label: 'Atrasado', total: promotores, backgroundColor: '#A80202', type: 3 },
                     ],
                     valor
                 }
@@ -54,23 +54,19 @@ export default Nps = ({ }) => {
                 <>
                     <ContainerScroll
                         refreshControl={
-                            <RefreshControl refreshing={loading} onRefresh={nps} />
+                            <RefreshControl refreshing={loading} onRefresh={performanceEntrega} />
                         }>
-                        <Title align="left" left="15px" top="35px" font="26px" weight="600">NPS</Title>
+                        <Title align="left" left="15px" top="35px" font="26px" weight="600">Performance de entrega</Title>
                         <Hr />
-                        <ContainerWrapper>
-                            {data.length > 0 &&
-                                data[0].totals.map((d, index) => (
-                                    <LabelBox key={index} item={d} />
-                                ))}
-                        </ContainerWrapper>
-                        <SpeedoMeter valor={data[0].valor} />
-                        <ContainerWrapper>
-                            {data.length > 0 &&
-                                data[0].nps.map((d, index) => (
-                                    <LabelNps key={index} item={d} />
-                                ))}
-                        </ContainerWrapper>
+                        <Container flex={1}>
+                            <PieCharts />
+                            <ContainerWrapper>
+                                {data.length > 0 &&
+                                    data[0].nps.map((d, index) => (
+                                        <LabelNps key={index} item={d} />
+                                    ))}
+                            </ContainerWrapper>
+                        </Container>
                     </ContainerScroll>
                 </>
             }

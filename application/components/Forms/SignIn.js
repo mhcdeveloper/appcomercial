@@ -16,7 +16,7 @@ export default function SignIn() {
   const formRef = useRef(null);
   const { navigate } = useNavigation();
 
-  useEffect(async () => {
+  useEffect(() => {
     loginDigital();
   }, []);
 

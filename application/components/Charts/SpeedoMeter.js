@@ -1,9 +1,9 @@
 import React from 'react';
 import RNSpeedometer from 'react-native-speedometer'
 import { width } from '../../utils';
-import { Title, Container } from '../../styles';
+import { Container } from '../../styles';
 
-export default SpeedoMeter = ({ }) => {
+export default SpeedoMeter = ({ valor }) => {
     const defaults = {
         minValue: 0,
         maxValue: 100,
@@ -42,7 +42,7 @@ export default SpeedoMeter = ({ }) => {
                 minValue={0}
                 maxValue={100}
                 labels={defaults.labels} 
-                value={60}
+                value={valor}
                 size={width - 50} />
         </Container>
     )
