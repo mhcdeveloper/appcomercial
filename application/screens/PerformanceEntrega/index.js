@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import Colors from '../../styles/Colors';
 import LabelBox from '../../components/Label/LabelBox';
 import LabelNps from '../../components/Label/LabelNps';
-import { getNps } from '../../services';
+import { getListPerformanceEntrega } from '../../services';
 import Loading from '../../components/Loading';
 import PieCharts from '../../components/Charts/PieCharts';
 
@@ -20,22 +20,15 @@ export default PerformanceEntrega = ({ }) => {
 
     function performanceEntrega() {
         setLoading(true);
-        getNps().then(nps => {
-            console.log(nps)
-            const { entregue, total, detratores, neutros, promotores, valor, npsVsEntregue } = nps.data
+        getListPerformanceEntrega().then(performance => {
+            const { antecipado, prazo, atrasado } = performance.data
             let data = [
                 {
-                    totals: [
-                        { label: 'Total de entrega', total: entregue },
-                        { label: 'Total NPS respondidas', total },
-                        { label: 'NPS respondidas vs. Entregas', total: `${npsVsEntregue}%` },
-                    ],
-                    nps: [
-                        { label: 'Antecipado', total: detratores, backgroundColor: '#016DD2', type: 1 },
-                        { label: 'Prazo', total: neutros, backgroundColor: '#05A802', type: 2 },
-                        { label: 'Atrasado', total: promotores, backgroundColor: '#A80202', type: 3 },
-                    ],
-                    valor
+                    performance: [
+                        { label: 'Antecipado', total: antecipado, backgroundColor: '#016DD2', type: 1 },
+                        { label: 'Prazo', total: prazo, backgroundColor: '#05A802', type: 2 },
+                        { label: 'Atrasado', total: atrasado, backgroundColor: '#A80202', type: 3 },
+                    ]
                 }
             ]
             setData(data)
@@ -58,15 +51,17 @@ export default PerformanceEntrega = ({ }) => {
                         }>
                         <Title align="left" left="15px" top="35px" font="26px" weight="600">Performance de entrega</Title>
                         <Hr />
-                        <Container flex={1}>
+                        <Container
+                            marginTop="40px"
+                            marginBottom="40px">
                             <PieCharts />
-                            <ContainerWrapper>
-                                {data.length > 0 &&
-                                    data[0].nps.map((d, index) => (
-                                        <LabelNps key={index} item={d} />
-                                    ))}
-                            </ContainerWrapper>
                         </Container>
+                        <ContainerWrapper>
+                            {data.length > 0 &&
+                                data[0].performance.map((d, index) => (
+                                    <LabelNps key={index} item={d} />
+                                ))}
+                        </ContainerWrapper>
                     </ContainerScroll>
                 </>
             }
