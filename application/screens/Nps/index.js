@@ -9,10 +9,13 @@ import SpeedoMeter from '../../components/Charts/SpeedoMeter';
 import LabelNps from '../../components/Label/LabelNps';
 import { getNps } from '../../services';
 import Loading from '../../components/Loading';
+import { useSelector } from 'react-redux';
 
 export default Nps = ({ }) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+
+    const header = useSelector(state => state.header);
 
     useEffect(() => {
         nps();
@@ -20,7 +23,7 @@ export default Nps = ({ }) => {
 
     function nps() {
         setLoading(true);
-        getNps().then(nps => {
+        getNps({ idCliente: header.cliente.id }).then(nps => {
             console.log(nps)
             const { entregue, total, detratores, neutros, promotores, valor, npsVsEntregue } = nps.data
             let data = [
@@ -31,9 +34,9 @@ export default Nps = ({ }) => {
                         { label: 'NPS respondidas vs. Entregas', total: `${npsVsEntregue}%` },
                     ],
                     nps: [
-                        { label: 'Detratores', total: detratores, backgroundColor: '#E64C65', type: 1 },
-                        { label: 'Neutros', total: neutros, backgroundColor: '#FCB150', type: 2 },
-                        { label: 'Promotores', total: promotores, backgroundColor: '#05A802', type: 3 },
+                        { label: 'Detratores', total: detratores.length, backgroundColor: '#E64C65', list: detratores, type: 1 },
+                        { label: 'Neutros', total: neutros.length, backgroundColor: '#FCB150', list: neutros, type: 1 },
+                        { label: 'Promotores', total: promotores.length, backgroundColor: '#05A802', list: promotores, type: 1 },
                     ],
                     valor
                 }

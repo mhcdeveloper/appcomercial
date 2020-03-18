@@ -4,7 +4,8 @@ import { Title } from '../../styles';
 import { width } from '../../utils';
 import Colors from '../../styles/Colors';
 
-export default Detalhes = ({ item }) => {
+export default DetalhesNps = ({ data }) => {
+    const { item } = data;
     return (
         <View style={{ flex: 1, width, paddingRight: 30 }}>
             <Title top="20px" bottom="8px" align="left" left="15px">Nota Fiscal</Title>

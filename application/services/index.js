@@ -4,7 +4,7 @@ import api from './apiMobile';
 
 const CancelToken = axios.CancelToken;
 
-export const getNps = async () => {
+export const getNps = async (cliente) => {
     return new Promise(async (resolve, reject) => {
         try {
             const source = CancelToken.source();
@@ -14,7 +14,7 @@ export const getNps = async () => {
                     source.cancel();
                 }
             }, 14000);
-            response = await api.post('/api/nps/listNps').then(async nps => {
+            response = await api.post('/api/nps/listNps', cliente).then(async nps => {
                 resolve(nps);
             }).catch(err => {
                 reject(false);
@@ -25,7 +25,7 @@ export const getNps = async () => {
     });
 }
 
-export const getListPerformanceEntrega = async () => {
+export const getListPerformanceEntrega = async (cliente) => {
     return new Promise(async (resolve, reject) => {
         try {
             const source = CancelToken.source();
@@ -35,7 +35,7 @@ export const getListPerformanceEntrega = async () => {
                     source.cancel();
                 }
             }, 14000);
-            response = await api.post('/api/performanceEntrega/listPerformanceEntrega').then(async performance => {
+            response = await api.post('/api/performanceEntrega/listPerformanceEntrega', cliente).then(async performance => {
                 resolve(performance);
             }).catch(err => {
                 reject(false);

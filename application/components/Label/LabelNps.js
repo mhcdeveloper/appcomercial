@@ -8,9 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 
 export default LabelNps = ({ item }) => {
     const { navigate } = useNavigation();
+    console.log(item)
     return (
         <TouchableOpacity
             activeOpacity={0.7}
+            disabled={item.list.length == 0}
             onPress={() => navigate('Relatorio', { item })} 
             style={[styles.container, { backgroundColor: item.backgroundColor }]}>
             <View style={styles.containerTotal}>

@@ -4,15 +4,17 @@ import { StatusBar, RefreshControl } from 'react-native';
 import { ContainerScroll, Title, Hr, ContainerWrapper, Container } from '../../styles';
 import Header from '../../components/Header';
 import Colors from '../../styles/Colors';
-import LabelBox from '../../components/Label/LabelBox';
 import LabelNps from '../../components/Label/LabelNps';
 import { getListPerformanceEntrega } from '../../services';
 import Loading from '../../components/Loading';
 import PieCharts from '../../components/Charts/PieCharts';
+import { useSelector } from 'react-redux';
 
 export default PerformanceEntrega = ({ }) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    
+    const header = useSelector(state => state.header);
 
     useEffect(() => {
         performanceEntrega();
@@ -20,14 +22,14 @@ export default PerformanceEntrega = ({ }) => {
 
     function performanceEntrega() {
         setLoading(true);
-        getListPerformanceEntrega().then(performance => {
+        getListPerformanceEntrega({ idCliente: header.cliente.id }).then(performance => {
             const { antecipado, prazo, atrasado } = performance.data
             let data = [
                 {
                     performance: [
-                        { label: 'Antecipado', total: antecipado, backgroundColor: '#016DD2', type: 1 },
-                        { label: 'Prazo', total: prazo, backgroundColor: '#05A802', type: 2 },
-                        { label: 'Atrasado', total: atrasado, backgroundColor: '#A80202', type: 3 },
+                        { label: 'Antecipado', total: antecipado.length, backgroundColor: '#016DD2', list: antecipado, type: 2 },
+                        { label: 'Prazo', total: prazo.length, backgroundColor: '#05A802', list: prazo, type: 2 },
+                        { label: 'Atrasado', total: atrasado.length, backgroundColor: '#A80202', list: atrasado, type: 2 },
                     ]
                 }
             ]

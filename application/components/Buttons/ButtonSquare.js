@@ -7,7 +7,7 @@ import { Title } from '../../styles';
 import { width } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 
-export default ButtonSquare = ({ label, icon, menuScreen, rota }) => {
+export default ButtonSquare = ({ label, icon, rota }) => {
     const { navigate } = useNavigation();
     return (
         <TouchableOpacity
