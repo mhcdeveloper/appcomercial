@@ -7,23 +7,7 @@ import Colors from '../../styles/Colors';
 import ButtonSquare from '../../components/Buttons/ButtonSquare';
 
 const menus = [
-    {
-        icon: 'truck',
-        label: 'Notas em Trânsito',
-        menuScreen: {
-            label: 'Notas em Trânsito',
-            filters: [
-                { label: 'Número Nota Fiscal', name: 'NRNOTA' },
-                { label: 'Periodo', name: 'INTERVAL' },
-            ],
-            grid: [
-                { label: 'Número Nota Fiscal', name: 'NRNOTA' },
-                { label: 'Transportadora', name: 'TRANSP' },
-                { label: 'Previsão de Entrega', name: 'PREV' },
-                { label: 'Remetente', name: 'REME' },
-            ]
-        }
-    },
+    { icon: 'truck', label: 'Notas em Trânsito', rota: 'NotasTransito'},
     { icon: 'file-alt', label: 'AG Estoque' },
     { icon: 'truck-loading', label: 'Performance de Entrega', rota: 'PerformanceEntrega' },
     { icon: 'chart-bar', label: 'Devolução' },

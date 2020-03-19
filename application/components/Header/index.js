@@ -23,7 +23,7 @@ export default Header = ({ setMenu, showBack }) => {
     const [user, setUser] = useState(false);
     const [name, setName] = useState('');
 
-    const debouncedSearchCliente = useDebounce(name, 200);
+    const debouncedSearchCliente = useDebounce(name, 2000);
 
     useEffect(() => {
         getInfo();
