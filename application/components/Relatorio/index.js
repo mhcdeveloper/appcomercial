@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StatusBar, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -11,7 +11,8 @@ import DetalhesPerformance from '../../screens/PerformanceEntrega/DetalhesPerfor
 
 export default Relatorio = ({ route }) => {
     const { item } = route.params;
-    
+    const [page, setPage] = useState(0);
+
     function renderList(data) {
         if (item.type == 1) {
             return (
@@ -22,6 +23,16 @@ export default Relatorio = ({ route }) => {
                 <DetalhesPerformance data={data} />
             )
         }
+    }
+
+    function handlePagination(item) {
+        const { viewableItems, changed } = item;
+        if (viewableItems.length > 0) {
+            console.log(viewableItems[0].index)
+            // setPage(viewableItems[0].index)
+        }
+        console.log("Visible items are", viewableItems);
+        console.log("Changed in this iteration", changed);
     }
 
     return (
@@ -41,7 +52,8 @@ export default Relatorio = ({ route }) => {
                         data={item.list}
                         horizontal
                         pagingEnabled
-                        onScroll={(d) => console.log(d)}
+                        onViewableItemsChanged={handlePagination}
+                        viewabilityConfig={{ itemVisiblePercentThreshold: 50 }}
                         bounces={false}
                         showsHorizontalScrollIndicator={false}
                         renderItem={renderList}
@@ -55,6 +67,7 @@ export default Relatorio = ({ route }) => {
                         })}
                     />
                 </View>
+                <Title>{page} de {item.list.length}</Title>
             </Container>
         </Container>
     )

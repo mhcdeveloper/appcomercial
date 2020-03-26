@@ -10,6 +10,7 @@ import Nps from '../screens/Nps';
 import Relatorio from '../components/Relatorio';
 import PerformanceEntrega from '../screens/PerformanceEntrega';
 import NotasTransito from '../screens/NotasTransito';
+import HistoricoVendas from '../screens/HistoricoVendas';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function Routes() {
             <Stack.Screen name="PerformanceEntrega" component={PerformanceEntrega} options={{ headerShown: false }} />
             <Stack.Screen name="NotasTransito" component={NotasTransito} options={{ headerShown: false }} />
             <Stack.Screen name="Relatorio" component={Relatorio} options={{ headerShown: false }} />
+            <Stack.Screen name="HistoricoVenda" component={HistoricoVendas} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

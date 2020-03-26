@@ -11,7 +11,7 @@ const menus = [
     { icon: 'file-alt', label: 'AG Estoque' },
     { icon: 'truck-loading', label: 'Performance de Entrega', rota: 'PerformanceEntrega' },
     { icon: 'chart-bar', label: 'Devolução' },
-    { icon: 'chart-line', label: 'Histórico de Vendas' },
+    { icon: 'chart-line', label: 'Histórico de Vendas', rota: 'HistoricoVenda' },
     { icon: 'chart-bar', label: 'NPS', rota: 'Nps' },
     { icon: 'exclamation-triangle', label: 'Ocorrências' },
 ]
