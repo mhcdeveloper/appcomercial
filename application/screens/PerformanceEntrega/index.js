@@ -22,7 +22,7 @@ export default PerformanceEntrega = ({ }) => {
 
     function performanceEntrega() {
         setLoading(true);
-        getListPerformanceEntrega({ idCliente: header.cliente.id }).then(performance => {
+        getListPerformanceEntrega({ idCliente: header.cliente.ID }).then(performance => {
             const { antecipado, prazo, atrasado } = performance.data
             let data = [
                 {

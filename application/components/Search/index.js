@@ -6,8 +6,9 @@ import { ContainerRow, Title } from '../../styles';
 import { ActivityIndicator } from 'react-native';
 import Colors from '../../styles/Colors';
 import useDebounce from '../Input/useDebounce';
+import { filtrarProdutos } from '../../services';
 
-export default Search = ({ }) => {
+export default Search = ({ handleChange }) => {
     const [loading, setLoading] = useState(false);
     const [dados, setDados] = useState(false);
     const [name, setName] = useState('');
@@ -24,6 +25,15 @@ export default Search = ({ }) => {
 
     async function searchDados() {
         setLoading(true);
+        filtrarProdutos(name).then(produtos => {            
+            setDados(produtos);
+            setLoading(false);
+        }).catch(err => setLoading(false));
+    }
+
+    function changeProduto(prod) {
+        handleChange(prod);
+        setDados(false);
     }
 
     return (
@@ -36,8 +46,8 @@ export default Search = ({ }) => {
                 marginRight="20px"
                 paddingLeft="10px"
                 paddingRight="10px"
-                paddingTop="9px"
-                paddingBottom="9px"
+                paddingTop="4px"
+                paddingBottom="4px"
                 borderWidth={1}
                 zIndex={100}
                 elevation={10}
@@ -51,7 +61,7 @@ export default Search = ({ }) => {
                 }
                 <TextInput
                     style={custom.inputText}
-                    placeholder="Pesquisar"
+                    placeholder="Digite aqui"
                     onChangeText={(nome) => setName(nome)} />
             </ContainerRow>
             {dados &&
@@ -63,10 +73,10 @@ export default Search = ({ }) => {
                             return (
                                 <TouchableOpacity
                                     key={index}
-                                    onPress={() => handleCliente(cli)}
+                                    onPress={() => changeProduto(cli)}
                                     style={custom.btnSelect}
                                     activeOpacity={0.7}>
-                                    <Title key={index} align="left" color={Colors.regular}>{cli.text}</Title>
+                                    <Title key={index} align="left" color={Colors.regular}>{cli.DSPRODUT}</Title>
                                 </TouchableOpacity>
                             )
                         })

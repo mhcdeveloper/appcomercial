@@ -18,7 +18,7 @@ export default NotasTransito = () => {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        getListNotasTransito({ idCliente: header.cliente.id }).then(notas => {
+        getListNotasTransito({ idCliente: header.cliente.ID }).then(notas => {
             console.log(notas)
             setList(notas);
             setLoading(false);

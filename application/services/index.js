@@ -88,3 +88,66 @@ export const getListIndicadores = async (data) => {
         }
     });
 }
+
+export const getListHistoricoVendasProdutos = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const source = CancelToken.source();
+            let response = null;
+            setTimeout(() => {
+                if (response === null) {
+                    source.cancel();
+                }
+            }, 14000);
+            response = await api.post('/api/historicoVendas/listHistoricoVendasByProduto', data).then(async historico => {
+                resolve(historico);
+            }).catch(err => {
+                reject(false);
+            })
+        } catch (error) {
+            console.log(error)
+            reject(error);
+        }
+    });
+}
+
+export const filtrarClientes = async (name) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const source = CancelToken.source();
+            let response = null;
+            setTimeout(() => {
+                if (response === null) {
+                    source.cancel();
+                }
+            }, 14000);
+            response = await api.post('/api/pesquisar/clientes', { name }).then(async res => {
+                resolve(res.data);
+            })
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+export const filtrarProdutos = async (name) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            console.log(name)
+            const source = CancelToken.source();
+            let response = null;
+            setTimeout(() => {
+                if (response === null) {
+                    source.cancel();
+                }
+            }, 14000);
+            response = await api.post('/api/pesquisar/produtos', { name }).then(async res => {
+                console.log(res)
+                resolve(res.data);
+            })
+        } catch (error) {
+            console.log(error)
+            reject(error);
+        }
+    });
+}

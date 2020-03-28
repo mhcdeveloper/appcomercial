@@ -192,7 +192,7 @@ export const Button = styled.TouchableOpacity`
     border-radius: 40px;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     padding: ${props => props.padding ? props.padding : '8px'};
-    margin: 5px;    
+    margin: 10px;    
 `;
 
 //ESTILOS DE INPUTS

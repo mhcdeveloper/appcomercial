@@ -11,7 +11,7 @@ import Colors from '../../styles/Colors';
 import { setCliente, handleClose } from '../../store/Actions/HeaderActions';
 import { getUser } from '../../utils';
 import useDebounce from '../Input/useDebounce';
-import { filtrarClientes } from '../../services/loginService';
+import { filtrarClientes } from '../../services/';
 
 export default Header = ({ setMenu, showBack }) => {
     const header = useSelector(state => state.header);
@@ -44,6 +44,9 @@ export default Header = ({ setMenu, showBack }) => {
         filtrarClientes(name).then(clientes => {
             setLoadingSearch(false);
             setClientes(clientes)
+        }).catch(err => {
+            setLoadingSearch(false)
+            setLoadingSearch(false)
         });
     }
 
@@ -85,7 +88,7 @@ export default Header = ({ setMenu, showBack }) => {
                             <ContainerRow>
                                 <View style={{ width: '63%' }}>
                                     <Title font={20} align="left" left="30px" color={Colors.white} weight="500">Cliente:</Title>
-                                    <Title font={20} align="left" left="30px" color={Colors.white}>{header.cliente.nmclient}</Title>
+                                    <Title font={20} align="left" left="30px" color={Colors.white}>{header.cliente.NMCLIENT}</Title>
                                 </View>
                                 {setMenu &&
                                     <TouchableOpacity
@@ -142,13 +145,14 @@ export default Header = ({ setMenu, showBack }) => {
                             style={custom.scrollClientes}>
                             {clientes.length > 0 ?
                                 clientes.map((cli, index) => {
+                                    console.log(cli)
                                     return (
                                         <TouchableOpacity
                                             key={index}
                                             onPress={() => handleCliente(cli)}
                                             style={custom.btnSelectCliente}
                                             activeOpacity={0.7}>
-                                            <Title key={index} align="left" color={Colors.regular}>{cli.text}</Title>
+                                            <Title key={index} align="left" color={Colors.regular}>{cli.TEXT}</Title>
                                         </TouchableOpacity>
                                     )
                                 })

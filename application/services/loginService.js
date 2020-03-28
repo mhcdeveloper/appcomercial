@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { storeUser, getUserInfo } from '../utils';
+import { storeUser } from '../utils';
 import api from './api';
 
 const CancelToken = axios.CancelToken;
@@ -46,25 +46,6 @@ export const forgotPassword = async (user) => {
             }, 14000);
             response = await api.post('/api/mo/usuario/resetarSenha', user).then(async res => {
                 resolve(true);
-            })
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
-
-export const filtrarClientes = async (name) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const source = CancelToken.source();
-            let response = null;
-            setTimeout(() => {
-                if (response === null) {
-                    source.cancel();
-                }
-            }, 14000);
-            response = await api.post('/api/filtro/clientes', { parameter: name, remetrans: true }).then(async res => {
-                resolve(res.data);
             })
         } catch (error) {
             reject(error);

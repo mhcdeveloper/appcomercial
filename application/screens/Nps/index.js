@@ -23,8 +23,7 @@ export default Nps = ({ }) => {
 
     function nps() {
         setLoading(true);
-        getNps({ idCliente: header.cliente.id }).then(nps => {
-            console.log(nps)
+        getNps({ idCliente: header.cliente.ID }).then(nps => {
             const { entregue, total, detratores, neutros, promotores, valor, npsVsEntregue } = nps.data
             let data = [
                 {
