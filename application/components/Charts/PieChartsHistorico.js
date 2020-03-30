@@ -2,45 +2,54 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Pie from 'react-native-pie'
 
-import { Title, ContainerCenter } from '../../styles';
+import { Title, ContainerCenter, ContainerRow } from '../../styles';
+import Colors from '../../styles/Colors';
 
 export default PieCharts = ({ data }) => {
     const [section, setSection] = useState(false);
 
     useEffect(() => {
-        console.log(data)
+        setSection(data.filter(d => d.valor > 0));
     }, [])
 
     return (
         <ContainerCenter>
-            <Pie
-                radius={140}
-                innerRadius={100}
-                sections={[
-                    {
-                        percentage: 41.7,
-                        color: '#05A802',                        
-                    },
-                    {
-                        percentage: 6.4,
-                        color: '#A80202',
-                    },
-                    {
-                        percentage: 51.87,
-                        color: '#016DD2',
-                    },
-                ]}
-                backgroundColor="#ddd"
-            />
+            {section &&
+                <ContainerRow justifyContent="space-between">
+                    <View style={styles.chart}>
+                        <Pie
+                            radius={140}
+                            innerRadius={100}
+                            sections={section}
+                            backgroundColor="#ddd"
+                        />
+                    </View>
+                    <View style={styles.info}>
+                        {data.map(d => {
+                            return (
+                                <View style={styles.legend}>
+                                    <Title font="18px" align="left" weight="600" color={d.color}>{d.ano}</Title>
+                                    <Title font="26px" left="10px" weight="600" color={Colors.regular}>{d.valor}</Title>
+                                </View>
+                            )
+                        })}
+                    </View>
+                </ContainerRow>
+            }
         </ContainerCenter>
 
     )
 }
 
 const styles = StyleSheet.create({
-    gauge: {
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
+    chart: {
+        marginRight: 15
     },
+    legend: {
+        paddingHorizontal: 10,
+        backgroundColor: Colors.lighter,
+        borderRadius: 10,
+        marginRight: 15,
+        margin: 5
+    }
 })

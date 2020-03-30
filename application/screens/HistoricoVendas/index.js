@@ -89,8 +89,7 @@ export default HistoricoVenda = ({ }) => {
         if (nomeProduto != false && nomeProduto != '' && params.length > 0) {
             setLoading(true);
             getListHistoricoVendasProdutos(filter).then(historico => {
-                console.log(historico)
-                navigate('DetalheHistorico', { dados: {}, nomeProduto });
+                navigate('DetalheHistorico', { dados: historico.data, nomeProduto });
                 setLoading(false);
             }).catch(err => setLoading(false));
         } else {

@@ -11,6 +11,7 @@ import PieCharts from '../../components/Charts/PieCharts';
 import { useSelector } from 'react-redux';
 
 export default PerformanceEntrega = ({ }) => {
+    const [section, setSection] = useState(false);
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     
@@ -23,7 +24,7 @@ export default PerformanceEntrega = ({ }) => {
     function performanceEntrega() {
         setLoading(true);
         getListPerformanceEntrega({ idCliente: header.cliente.ID }).then(performance => {
-            const { antecipado, prazo, atrasado } = performance.data
+            const { antecipado, prazo, atrasado, section } = performance.data
             let data = [
                 {
                     performance: [
@@ -34,6 +35,7 @@ export default PerformanceEntrega = ({ }) => {
                 }
             ]
             setData(data)
+            setSection(section);
             setLoading(false);
         });
     }
@@ -56,7 +58,7 @@ export default PerformanceEntrega = ({ }) => {
                         <Container
                             marginTop="40px"
                             marginBottom="40px">
-                            <PieCharts />
+                            {section && <PieCharts data={section} />}
                         </Container>
                         <ContainerWrapper>
                             {data.length > 0 &&

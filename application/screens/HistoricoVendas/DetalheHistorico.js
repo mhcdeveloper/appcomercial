@@ -9,7 +9,7 @@ import PieChartsHistorico from '../../components/Charts/PieChartsHistorico';
 import Btn from '../../components/Buttons';
 
 export default DetalheHistorico = ({ route }) => {
-    const [data, setData] = useState({});
+    const [data, setData] = useState(false);
     const [nome, setNome] = useState(false);
     const { goBack } = useNavigation();
 
@@ -31,7 +31,7 @@ export default DetalheHistorico = ({ route }) => {
                 <Container
                     marginTop="20px"
                     marginBottom="10px">
-                    <PieChartsHistorico data={data} />
+                    {data && <PieChartsHistorico data={data} />}
                 </Container>
                 <Btn
                     padding="16px"
