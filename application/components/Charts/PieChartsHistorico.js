@@ -29,7 +29,7 @@ export default PieCharts = ({ data }) => {
                             return (
                                 <View style={styles.legend}>
                                     <Title font="18px" align="left" weight="600" color={d.color}>{d.ano}</Title>
-                                    <Title font="26px" left="10px" weight="600" color={Colors.regular}>{d.valor}</Title>
+                                    <Title font="20px" left="5px" weight="600" color={Colors.regular}>{d.valor}</Title>
                                 </View>
                             )
                         })}
@@ -43,7 +43,7 @@ export default PieCharts = ({ data }) => {
 
 const styles = StyleSheet.create({
     chart: {
-        marginRight: 15
+        marginLeft: 15
     },
     legend: {
         paddingHorizontal: 10,
