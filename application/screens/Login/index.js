@@ -30,9 +30,6 @@ const Login = () => {
                         backgroundColor={Colors.transparent}>
                         <SignIn />
                     </Container>
-                    {/* <ContainerFooter>
-                        <Title onPress={() => navigate('Forgot')} top="10px" bottom="10px" color={Colors.white}>Esqueceu sua senha ?</Title>
-                    </ContainerFooter> */}
                 </ContainerScroll>
             </SafeContainer>
         </ImageBackground>

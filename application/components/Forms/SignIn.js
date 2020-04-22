@@ -44,6 +44,7 @@ export default function SignIn() {
       setLoading(false);
       storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
     }).catch(err => {
+      console.log(err)
       Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
         {
           text: "ok",

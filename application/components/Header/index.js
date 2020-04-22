@@ -32,6 +32,11 @@ export default Header = ({ setMenu, showBack }) => {
         } else {
             setClientes(false)
         }
+        if (setMenu) {
+            if (header.cliente.NMCLIENT) {
+                setMenu(true);
+            }
+        }
     }, [debouncedSearchCliente])
 
     async function getInfo() {
