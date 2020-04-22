@@ -33,13 +33,16 @@ export default DetalheHistorico = ({ route }) => {
                     marginBottom="10px">
                     {data && <PieChartsHistorico data={data} />}
                 </Container>
-                <Btn
-                    padding="16px"
-                    font="28px"
-                    label="Nova Pesquisa"
-                    onSubmit={() => goBack()}
-                    backgroundColor={Colors.primary}
-                />
+                <Container
+                    marginTop="20px">
+                    <Btn
+                        padding="16px"
+                        font="28px"
+                        label="Nova Pesquisa"
+                        onSubmit={() => goBack()}
+                        backgroundColor={Colors.primary}
+                    />
+                </Container>
             </ContainerScroll>
         </Container>
     )

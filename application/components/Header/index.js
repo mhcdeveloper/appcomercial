@@ -86,7 +86,7 @@ export default Header = ({ setMenu, showBack }) => {
                             </View>
                             :
                             <ContainerRow>
-                                <View style={{ width: '63%' }}>
+                                <View style={{ width: '60%' }}>
                                     <Title font={20} align="left" left="30px" color={Colors.white} weight="500">Cliente:</Title>
                                     <Title font={20} align="left" left="30px" color={Colors.white}>{header.cliente.NMCLIENT}</Title>
                                 </View>

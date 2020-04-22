@@ -8,7 +8,7 @@ import Colors from '../../styles/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { login, loginWithDigital } from '../../services/loginService';
 import { ActivityIndicator, Alert } from 'react-native';
-import { Content } from '../../styles';
+import { Content, Title } from '../../styles';
 import { storeUserInfo, getUserInfo } from '../../utils';
 
 export default function SignIn() {
@@ -26,7 +26,6 @@ export default function SignIn() {
       FingerprintScanner
         .authenticate({ description: 'Autenticar com biometria, Posicione o dedo no leitor' })
         .then(async (res) => {
-          console.log(res)
           setLoading(true)
           await login(user).then(_ => {
             setLoading(false);
@@ -34,25 +33,23 @@ export default function SignIn() {
           }).catch(err => setLoading(false))
         })
         .catch((error) => {
-          Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
-            {
-              text: "ok",
-              onPress: () => null,
-              style: "cancel"
-            }]);
           setLoading(false);
         });
     }
   }
 
   async function handleSubmit(data) {
-    data.dsmodulo = 'TRACKING';
     setLoading(true);
     await login(data).then(res => {
       setLoading(false);
       storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
     }).catch(err => {
-      console.log(err)
+      Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
+        {
+          text: "ok",
+          onPress: () => null,
+          style: "cancel"
+        }]);
       setLoading(false)
     })
   }
@@ -86,13 +83,16 @@ export default function SignIn() {
           <ActivityIndicator size="large" color={Colors.white} />
         </Content>
         :
-        <Btn
-          padding="16px"
-          font="28px"
-          label="ENTRAR"
-          onSubmit={() => formRef.current.submitForm()}
-          backgroundColor={Colors.primary}
-        />
+        <>
+          <Btn
+            padding="16px"
+            font="28px"
+            label="ENTRAR"
+            onSubmit={() => formRef.current.submitForm()}
+            backgroundColor={Colors.primary}
+          />
+          <Title onPress={() => navigate('Forgot')} top="10px" bottom="10px" color={Colors.white}>Esqueceu sua senha ?</Title>
+        </>
       }
     </Form>
   );

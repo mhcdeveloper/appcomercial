@@ -16,7 +16,7 @@ export default LabelNps = ({ item }) => {
             onPress={() => navigate('Relatorio', { item })} 
             style={[styles.container, { backgroundColor: item.backgroundColor }]}>
             <View style={styles.containerTotal}>
-                <Title weight="600" top="5px" font="55px" color={Colors.white}>{item.total}</Title>
+                <Title weight="600" top="5px" font="45px" color={Colors.white}>{item.total}</Title>
             </View>
             <View style={styles.containerLabel}>
                 <Title bottom="5px" font="14px" color={Colors.regular}>{item.label}</Title>
