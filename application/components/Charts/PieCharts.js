@@ -22,7 +22,7 @@ export default PieCharts = ({ data }) => {
                         backgroundColor="#ddd"
                     />
                     <View style={styles.gauge}>
-                        <Title font="60px" weight="600">{section[0].percentage + section[2].percentage}%</Title>
+                        <Title left="5px" right="5px" font="55px" weight="600">{parseFloat(section[0].percentage + section[2].percentage).toFixed(2)}%</Title>
                     </View>
                 </>
                 :

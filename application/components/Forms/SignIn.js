@@ -25,7 +25,8 @@ export default function SignIn() {
     if (user) {
       FingerprintScanner
         .authenticate({ description: 'Autenticar com biometria, Posicione o dedo no leitor' })
-        .then(async () => {
+        .then(async (res) => {
+          console.log(res)
           setLoading(true)
           await login(user).then(_ => {
             setLoading(false);
@@ -33,12 +34,14 @@ export default function SignIn() {
           }).catch(err => setLoading(false))
         })
         .catch((error) => {
+          console.log(error)
           setLoading(false);
         });
     }
   }
 
   async function handleSubmit(data) {
+    data.dsmodulo = 'TRACKING';
     setLoading(true);
     await login(data).then(res => {
       setLoading(false);
@@ -50,7 +53,7 @@ export default function SignIn() {
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Input
         name="dsemalog"
-        type="email"
+        keyboardType="email-address"
         placeholder="E-mail"
         autoCapitalize="none"
         icon="user"
@@ -62,6 +65,7 @@ export default function SignIn() {
         type="password"
         placeholder="Senha"
         secureTextEntry={true}
+        autoCapitalize="none"
         icon="lock"
         color={Colors.white}
         placeholderTextColor={Colors.white}

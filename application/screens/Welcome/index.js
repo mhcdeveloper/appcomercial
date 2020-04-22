@@ -11,14 +11,13 @@ export default Welcome = ({ }) => {
     const { navigate } = useNavigation();
     useEffect(() => {
         setTimeout(() => {
-            getUser().then(user => {
-                if (user) {
-                    navigate('Home');
-                    // navigate('Login');
-                } else {
+            // getUser().then(user => {
+            //     if (user) {
+            //         navigate('Home');
+            //     } else {
                     navigate('Login');
-                }
-            });
+                // }
+            // });
         }, 2000);
     }, []);
     return (

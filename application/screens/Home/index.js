@@ -8,12 +8,12 @@ import ButtonSquare from '../../components/Buttons/ButtonSquare';
 
 const menus = [
     { icon: 'truck', label: 'Notas em Trânsito', rota: 'NotasTransito'},
-    { icon: 'file-alt', label: 'AG Estoque' },
+    { icon: 'file-alt', label: 'AG Estoque', rota: 'AgEstoque' },
     { icon: 'truck-loading', label: 'Performance de Entrega', rota: 'PerformanceEntrega' },
-    { icon: 'chart-bar', label: 'Devolução' },
+    { icon: 'chart-bar', label: 'Devolução', rota: 'Devolucao' },
     { icon: 'chart-line', label: 'Histórico de Vendas', rota: 'HistoricoVenda' },
     { icon: 'chart-bar', label: 'NPS', rota: 'Nps' },
-    { icon: 'exclamation-triangle', label: 'Ocorrências' },
+    { icon: 'exclamation-triangle', label: 'Ocorrências', rota: 'Ocorrencias' },
 ]
 
 const Home = ({ }) => {

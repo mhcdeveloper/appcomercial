@@ -16,6 +16,7 @@ export const login = async (user) => {
                 }
             }, 14000);
             response = await api.post('/api/usuario/login', user).then(async res => {
+                console.log(res)
                 if (res.data.LIBERADO == 1) {
                     api.defaults.headers.common['x-access-token'] = res.data.TOKEN;
                     await storeUser(JSON.stringify(res.data));
