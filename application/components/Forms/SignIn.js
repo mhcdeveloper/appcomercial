@@ -7,7 +7,7 @@ import Input from '../Input';
 import Colors from '../../styles/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { login, loginWithDigital } from '../../services/loginService';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import { Content } from '../../styles';
 import { storeUserInfo, getUserInfo } from '../../utils';
 
@@ -34,7 +34,12 @@ export default function SignIn() {
           }).catch(err => setLoading(false))
         })
         .catch((error) => {
-          console.log(error)
+          Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
+            {
+              text: "ok",
+              onPress: () => null,
+              style: "cancel"
+            }]);
           setLoading(false);
         });
     }
@@ -46,7 +51,10 @@ export default function SignIn() {
     await login(data).then(res => {
       setLoading(false);
       storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
-    }).catch(_ => setLoading(false))
+    }).catch(err => {
+      console.log(err)
+      setLoading(false)
+    })
   }
 
   return (

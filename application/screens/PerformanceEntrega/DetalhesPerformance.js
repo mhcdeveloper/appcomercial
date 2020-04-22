@@ -18,11 +18,11 @@ export default DetalhesPerformance = ({ data }) => {
             </View>
             <Title top="20px" bottom="8px" align="left" left="15px">Peso</Title>
             <View style={{ borderRadius: 20, padding: 10, backgroundColor: Colors.lighter }}>
-                <Title align="left" left="15px" color={Colors.regular}>{item.PSBRUTO}</Title>
+                <Title align="left" left="15px" color={Colors.regular}>{parseFloat(item.PSBRUTO).toFixed(2)}</Title>
             </View>
             <Title top="20px" bottom="8px" align="left" left="15px">Valor</Title>
             <View style={{ borderRadius: 20, padding: 10, backgroundColor: Colors.lighter }}>
-                <Title align="left" left="15px" color={Colors.regular}>{item.VRDELIVE}</Title>
+                <Title align="left" left="15px" color={Colors.regular}>R${parseFloat(item.VRDELIVE).toFixed(2)}</Title>
             </View>
         </View>
     )

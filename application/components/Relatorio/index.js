@@ -52,7 +52,7 @@ export default Relatorio = ({ route }) => {
                         data={item.list}
                         horizontal
                         pagingEnabled
-                        onViewableItemsChanged={handlePagination}
+                        // onViewableItemsChanged={handlePagination}
                         viewabilityConfig={{ itemVisiblePercentThreshold: 50 }}
                         bounces={false}
                         showsHorizontalScrollIndicator={false}
@@ -60,14 +60,14 @@ export default Relatorio = ({ route }) => {
                         keyExtractor={item => item.id}
                         snapToInterval={width}
                         decelerationRate="fast"
-                        getItemLayout={(data, index) => ({
-                            length: width,
-                            offset: width * index,
-                            index,
-                        })}
+                        // getItemLayout={(data, index) => ({
+                        //     length: width,
+                        //     offset: width * index,
+                        //     index,
+                        // })}
                     />
                 </View>
-                <Title>{page} de {item.list.length}</Title>
+                {/* <Title>{page} de {item.list.length}</Title> */}
             </Container>
         </Container>
     )
