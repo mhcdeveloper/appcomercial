@@ -7,7 +7,9 @@ import Colors from '../../../styles/Colors';
 
 const QuestionItem = ({ item }) => {
     return (
-        <ContainerRow marginBottom="10px">
+        <ContainerRow 
+            marginTop="15px"
+            marginBottom="15px">
             <View style={styles.question}>
                 <Title align="left">
                     {item.DSCHLIST}

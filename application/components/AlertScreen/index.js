@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { Container, ContentMain, ContainerCenter, Title } from '../../styles';
+import { Container, ContainerCenter, Title } from '../../styles';
 import BtnFull from '../Buttons/BtnFull';
 
 const AlertScreen = ({ icon, color, message, alert }) => {
