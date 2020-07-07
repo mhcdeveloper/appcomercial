@@ -34,13 +34,20 @@ function Input({ color, icon, name, label, ...rest }) {
             {label && <Text>{label}</Text>}
             <ContainerRow 
                 backgroundColor={Colors.transparent}
-                borderBottomWidth={1}
-                paddingTop="8px"
-                paddingBottom="8px"
+                borderWidth={1}
+                borderRadius={40}
+                borderColor={Colors.lighter}
+                paddingTop="3px"
+                paddingBottom="3px"
+                marginBottom="10px"
                 borderBottomColor={color}
                 justifyContent="flex-start">
                 {icon && <Icon name={icon} size={28} color={color} style={{ paddingLeft: 20, paddingRight: 10 }} />}
-                <TextInput ref={inputRef} defaultValue={defaultValue} {...rest} style={{ width: '80%', fontSize: 18, color }} />
+                <TextInput
+                    ref={inputRef} 
+                    defaultValue={defaultValue} 
+                    {...rest} 
+                    style={{ width: '80%', fontSize: 18, color, paddingLeft: 35 }} />
             </ContainerRow>
         </>
     )

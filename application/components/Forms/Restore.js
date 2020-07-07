@@ -35,7 +35,6 @@ export default function Restore() {
         name="DSEMALOG"
         type="email"
         placeholder="E-mail"
-        icon="user"
         color={Colors.white}
         placeholderTextColor={Colors.white}
       />
@@ -48,8 +47,8 @@ export default function Restore() {
         </Content>
         :
         <Btn
-          padding="16px"
-          font="28px"
+          padding="8px"
+          font="24px"
           label="ENVIAR"
           onSubmit={() => formRef.current.submitForm()}
           backgroundColor={Colors.primary}

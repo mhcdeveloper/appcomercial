@@ -1,16 +1,14 @@
 import React from 'react';
 import { StatusBar, ImageBackground } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import { BACKGROUND_SPLASH } from '../../assets/consts';
 import styles from '../../styles/styles';
 import Logo from '../../components/Logo';
 import Colors from '../../styles/Colors';
-import { Title, Container, ContainerFooter, ContainerScroll, SafeContainer } from '../../styles';
+import { Title, Container, ContainerScroll, SafeContainer } from '../../styles';
 import SignIn from '../../components/Forms/SignIn';
 
 const Login = () => {
-    const { navigate } = useNavigation();
     return (
         <ImageBackground
             source={BACKGROUND_SPLASH}
@@ -25,8 +23,8 @@ const Login = () => {
                     backgroundColor={Colors.transparent}>
                     <Logo />
                     <Container
-                        marginLeft="10%"
-                        marginRight="10%"
+                        marginLeft="6%"
+                        marginRight="6%"
                         backgroundColor={Colors.transparent}>
                         <SignIn />
                     </Container>

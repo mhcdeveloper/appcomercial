@@ -5,7 +5,9 @@ export default {
     thirth: '#FFFFFF',
     fourth: '#F57C00',
 
-    red: '#ed3121',
+    primaryText: '#5E5E5E',
+
+    red: '#F50000',
     lightRed: '#ed3145',
     darker: '#111',
     dark: '#333',
@@ -17,7 +19,7 @@ export default {
     white: '#FFF',
     brown: 'brown',
     lighterYellow: '#FFEB3B',
-    green: '#00ff00',
+    green: '#2AD200',
     laranja: '#F57C00',
     black: "#000000",
     link: '#2196F3',

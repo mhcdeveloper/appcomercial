@@ -39,20 +39,21 @@ export default function SignIn() {
   }
 
   async function handleSubmit(data) {
-    setLoading(true);
-    await login(data).then(res => {
-      setLoading(false);
-      storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
-    }).catch(err => {
-      console.log(err)
-      Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
-        {
-          text: "ok",
-          onPress: () => null,
-          style: "cancel"
-        }]);
-      setLoading(false)
-    })
+    navigate('Home')
+    // setLoading(true);
+    // await login(data).then(res => {
+    //   setLoading(false);
+    //   storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
+    // }).catch(err => {
+    //   console.log(err)
+    //   Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
+    //     {
+    //       text: "ok",
+    //       onPress: () => null,
+    //       style: "cancel"
+    //     }]);
+    //   setLoading(false)
+    // })
   }
 
   return (
@@ -60,9 +61,8 @@ export default function SignIn() {
       <Input
         name="dsemalog"
         keyboardType="email-address"
-        placeholder="E-mail"
+        placeholder="Usuário"
         autoCapitalize="none"
-        icon="user"
         color={Colors.white}
         placeholderTextColor={Colors.white}
       />
@@ -72,7 +72,6 @@ export default function SignIn() {
         placeholder="Senha"
         secureTextEntry={true}
         autoCapitalize="none"
-        icon="lock"
         color={Colors.white}
         placeholderTextColor={Colors.white}
       />
@@ -86,13 +85,21 @@ export default function SignIn() {
         :
         <>
           <Btn
-            padding="16px"
-            font="28px"
-            label="ENTRAR"
+            padding="8px"
+            font="24px"
+            label="Entrar"
             onSubmit={() => formRef.current.submitForm()}
             backgroundColor={Colors.primary}
           />
-          <Title onPress={() => navigate('Forgot')} top="10px" bottom="10px" color={Colors.white}>Esqueceu sua senha ?</Title>
+          <Title
+            align="right"
+            onPress={() => navigate('Forgot')}
+            top="2px"
+            fontSize="14px"
+            bottom="10px"
+            color={Colors.white}>
+            Esqueceu sua senha ?
+          </Title>
         </>
       }
     </Form>

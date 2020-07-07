@@ -20,8 +20,9 @@ export const Container = styled.View`
 `;
 
 export const ContentMain = styled.View`
+    flex: 1;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.white};
-    margin-top: ${props => props.marginTop ? props.marginTop : '240px'};
+    margin-top: ${props => props.marginTop ? props.marginTop : '140px'};
     margin-left: ${props => props.marginLeft ? props.marginLeft : '0px'};
     margin-right: ${props => props.marginRight ? props.marginRight : '0px'};
     margin-bottom: ${props => props.marginBottom ? props.marginBottom : '0px'};
@@ -126,8 +127,12 @@ export const ContainerPagination = styled.View`
 
 export const Hr = styled.View`
     border-bottom-width: 0.5;
-    border-color: ${props => Colors.lighter};
+    border-color: ${props => Colors.light};
     padding: 5px;
+    marginLeft: 15%;
+    marginRight: 15%;
+    marginTop: 4.5%;
+    marginBottom: 4.5%;
 `;
 
 export const Card = styled.View`
@@ -149,7 +154,7 @@ export const Title = styled.Text`
     font-size: ${props => props.font ? props.font : '18px'};
     text-align: ${props => props.align ? props.align : 'center'};
     font-weight: ${props => props.weight ? props.weight : '300'};
-    color: ${props => props.color ? props.color : Colors.primary};
+    color: ${props => props.color ? props.color : Colors.primaryText};
     padding-left: ${props => props.left ? props.left : '0px'};
     padding-right: ${props => props.right ? props.right : '0px'};
     padding-top: ${props => props.top ? props.top : '0px'};
@@ -188,11 +193,18 @@ export const InputText = styled.TextInput`
 
 //ESTILOS BUTTONS GLOBAIS
 export const Button = styled.TouchableOpacity`
-    width: 250px;
+    width: 100%;
     border-radius: 40px;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     padding: ${props => props.padding ? props.padding : '8px'};
     margin: 10px;    
+`;
+
+export const ButtonFull = styled.TouchableOpacity`
+    width: 100%;
+    height: 60px;
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
+    padding: ${props => props.padding ? props.padding : '8px'};
 `;
 
 //ESTILOS DE INPUTS

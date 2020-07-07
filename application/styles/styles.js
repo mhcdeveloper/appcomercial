@@ -32,9 +32,11 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.1)',
     },
     containerHeader: {
-        backgroundColor: Colors.primary,
-        borderBottomLeftRadius: 45,
-        elevation: 8,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: Colors.transparent,
     },
     containerRowPagination: {
         backgroundColor: Colors.regular,
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     },
     imgHeader: {
         width,
-        height: 190,
+        height: 120,
     },
     btnGradient: {
         borderRadius: 25,
