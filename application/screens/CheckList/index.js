@@ -51,12 +51,15 @@ const CheckList = ({ }) => {
                     :
                     <>
                         <IconLabel label="Checklist" title="Hora Certa" />
-                        <ContainerScroll 
-                            horizontal>                            
+                        <ContainerScroll
+                            pagingEnabled={true}
+                            showsHorizontalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
+                            horizontal>
                             {
                                 questions.map((question, index) => {
                                     return (
-                                        <View key={index} style={{ width, justifyContent: 'flex-start', alignItems: 'center', marginRight: 10, marginLeft: 10 }}>
+                                        <View key={index} style={{ width, alignItems: 'center' }}>
                                             {question.map((item, index) => {
                                                 return (
                                                     <QuestionItem key={index} item={item} />
