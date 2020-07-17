@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
-import { Container, ContentMain, ContainerFooter, ContainerCenter } from '../../styles';
+import { Container, ContentMain, ContainerCenter } from '../../styles';
 import Header from '../../components/Header';
 import { StatusBar } from 'react-native';
 import Colors from '../../styles/Colors';
 import IconLabel from '../../components/IconLabel';
 import ButtonSquare from '../../components/Buttons/ButtonSquare';
 import BtnFull from '../../components/Buttons/BtnFull';
+import { removeUser } from '../../utils';
+import { AuthContext } from '../../Context';
 
 const Home = ({ }) => {
+    const { signOut } = useContext(AuthContext);
+
+    function handleSubmit() {
+        removeUser();
+        signOut();
+    }
+
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
@@ -16,9 +25,13 @@ const Home = ({ }) => {
             <ContentMain>
                 <IconLabel icon="true" label="Bem Vindo," title="Matheus Oliveira" />
                 <ContainerCenter>
-                    <ButtonSquare rota="CheckList" icon="check-circle" label="CheckList" sublabel="Hora Certa" />
+                    <ButtonSquare rota="Modulo" icon="check-circle" label="CheckList" />
                 </ContainerCenter>
-                <BtnFull padding="10px" label="Sair" font="28px" />
+                <BtnFull
+                    onSubmit={handleSubmit}
+                    padding="10px"
+                    label="Sair"
+                    font="28px" />
             </ContentMain>
         </Container>
     )

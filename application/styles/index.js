@@ -103,13 +103,9 @@ export const ContainerZindex = styled.View`
 `;
 
 export const ContainerModal = styled.View`
-    flex: 1;    
-    justify-content: center;
     background-color: ${props => props.backgroundColor};
     padding: 20px;
-    border-radius: 25;
-    margin-top: 150px
-    margin-bottom: 150px
+    border-radius: 10px;
 `;
 
 export const ContainerWrapper = styled.View`
@@ -172,18 +168,19 @@ export const TextBtn = styled.Text`
 `;
 
 export const TextArea = styled.TextInput`
-    font-size: ${props => props.font ? props.font : 18};
-    padding-left: 13;
-    padding-right: 13;
-    padding-top: 6;
-    padding-bottom: 6;
-    color: ${props => props.color ? props.color : Colors.gray};
+    font-size: ${props => props.font ? props.font : '18px'};
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: ${props => props.color ? props.color : Colors.dark};
+    background: ${props => props.background ? props.background : Colors.gray};
     font-weight: 500;
     border-width: 0.7;
     border-color: ${props => Colors.gray};
-    border-radius: 3;
-    margin-bottom: 10;
-    margin-top: 10;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 `;
 
 export const InputText = styled.TextInput`
@@ -194,7 +191,7 @@ export const InputText = styled.TextInput`
 //ESTILOS BUTTONS GLOBAIS
 export const Button = styled.TouchableOpacity`
     width: 100%;
-    border-radius: 40px;
+    border-radius: ${props => props.border ? props.border : '40px'};;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     padding: ${props => props.padding ? props.padding : '8px'};
     margin: 10px;    

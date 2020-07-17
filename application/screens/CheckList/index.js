@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StatusBar, Dimensions } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, ContentMain, ContainerScroll } from '../../styles';
 import Header from '../../components/Header';
@@ -8,39 +9,89 @@ import IconLabel from '../../components/IconLabel';
 import BtnFull from '../../components/Buttons/BtnFull';
 import QuestionItem from './QuestionItem';
 import AlertScreen from '../../components/AlertScreen';
+import ModalAlert from '../../components/Modals';
+import Camera from '../../components/Camera';
+import { setImage, resetImage, setAnswer } from '../../store/Actions/QuestionActions';
+import { separarItemScroll } from '../../utils';
 
 const width = Dimensions.get('window').width;
 
-const CheckList = ({ }) => {
-    const [questions, setQuestion] = useState([]);
+const CheckList = ({ route }) => {
+    const dispatch = useDispatch();
+    const questions = useSelector(state => state.questions);
+    const [questionsList, setQuestion] = useState([]);
     const [alert, setAlert] = useState(false);
+    const [type, setType] = useState('');
+    const [open, setOpen] = useState(false);
+    const [selectedQuestion, setselectedQuestion] = useState(false);
+    const [anexo, setAnexo] = useState(false);
 
     useEffect(() => {
-        let perguntas = [
-            { id: 1, DSCHLIST: 'Ausência de lanternas com lampadas queimadas ?', action: 0 },
-            { id: 2, DSCHLIST: 'Sirene de ré está funcionando ?', action: 2 },
-            { id: 3, DSCHLIST: 'Buzina está funcionando ?', action: 1 },
-            { id: 4, DSCHLIST: 'Para-brisa, espelhos e retrovisores permitindo perfeita visualização ?', action: 0 },
-            { id: 5, DSCHLIST: 'Ausência de lanternas com lampadas queimadas ?', action: 0 },
-            { id: 6, DSCHLIST: 'Sirene de ré está funcionando ?', action: 2 },
-            { id: 7, DSCHLIST: 'Buzina está funcionando ?', action: 1 },
-        ];
-        setQuestion(separar(perguntas, 4));
-    }, []);
+        const { formulario } = route.params;    
+        setQuestion(separarItemScroll(formulario.questions, 4));
+    }, []);    
 
-    function separar(base, max) {
-        var res = [];
+    function resetModal() {
+        setOpen(!open);
+        dispatch(resetImage());
+        dispatch(setAnswer(''));
+    }
 
-        for (var i = 0; i < base.length; i = i + (max)) {
-            res.push(base.slice(i, (i + max)));
+    //Seta positivo ou negativo e abre o modal pra responder
+    function changeAnswer(item, type) {
+        setOpen(true);
+        setType(type);    
+        setselectedQuestion(item);
+    }
+
+    //Seta o canhoto na store e abre o modal de novo
+    function handleCanhoto(canhoto) {
+        dispatch(setImage(canhoto));
+        setAnexo(false);
+        setOpen(true);
+    }
+
+    //Grava a resposta da pergunta
+    function handleQuestion() {
+        let answer = {
+            IDSEQUEN: `${selectedQuestion.IDG112}, ${selectedQuestion.IDG113}`,
+            IDG114: selectedQuestion.IDG114,
+            SNRESULT: type, //Positivo ou negativo
+            DSTEXTO: questions.DSTEXTO,
         }
-        return res;
+
+        console.log(answer)
+    }
+
+    function finalizarChecklist() {
+
     }
 
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
             <Header setMenu={(show) => handleShowMenu(show)} />
+            {anexo && 
+                <Camera
+                    closeCamera={() => setAnexo(false)}
+                    setCanhoto={handleCanhoto}
+                    animatedLine={false}
+                    capture={true}
+                    width={180}
+                    height="99%"
+                />
+            }
+            {open && 
+                <ModalAlert  
+                    type={type}
+                    item={selectedQuestion}
+                    takePicture={() => {
+                        setAnexo(true);
+                        setOpen(false);
+                    }}
+                    closeModal={resetModal}
+                    handleQuestion={handleQuestion}/>                
+            }
             <ContentMain>
                 {alert ?
                     <AlertScreen
@@ -50,19 +101,19 @@ const CheckList = ({ }) => {
                         message="Seu caminhão não está aprovado para prosseguir" />
                     :
                     <>
-                        <IconLabel label="Checklist" title="Hora Certa" />
+                        <IconLabel label="Checklist" title={questions.modulo} />
                         <ContainerScroll
                             pagingEnabled={true}
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                             horizontal>
                             {
-                                questions.map((question, index) => {
+                                questionsList.map((question, index) => {
                                     return (
                                         <View key={index} style={{ width, alignItems: 'center' }}>
                                             {question.map((item, index) => {
                                                 return (
-                                                    <QuestionItem key={index} item={item} />
+                                                    <QuestionItem key={index} item={item} changeAnswer={changeAnswer} />
                                                 )
                                             })}
                                         </View>
@@ -70,7 +121,12 @@ const CheckList = ({ }) => {
                                 })
                             }
                         </ContainerScroll>
-                        <BtnFull padding="10px" label="Finalizar Checklist" font="28px" />
+                        <BtnFull 
+                            padding="10px" 
+                            label="Finalizar Checklist" 
+                            font="28px" 
+                            onSubmit={finalizarChecklist} 
+                        />
                     </>
                 }
             </ContentMain>

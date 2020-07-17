@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { ContainerRow, Title } from '../../../styles';
 import Colors from '../../../styles/Colors';
 
-const QuestionItem = ({ item }) => {
+const QuestionItem = ({ item, changeAnswer }) => {    
     return (
         <ContainerRow 
             marginTop="15px"
@@ -16,11 +16,16 @@ const QuestionItem = ({ item }) => {
                 </Title>
             </View>
             <View style={styles.answer}>
-                <TouchableOpacity>
-                    <Icon name="smile" size={40} color={item.action == 1 ? Colors.green : item.action == 0 ? Colors.light : Colors.light} />
+                <TouchableOpacity  
+                    onPress={() => changeAnswer(item, 1)}
+                    activeOpacity={0.7}>
+                    <Icon name="smile" size={40} color={item.SNRESULT == 1 ? Colors.green : item.SNRESULT == 2 ? Colors.light : Colors.light} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ paddingLeft: 15 }}>
-                    <Icon name="frown" size={40} color={item.action == 2 ? Colors.red : item.action == 0 ? Colors.light : Colors.light} />
+                <TouchableOpacity 
+                    onPress={() => changeAnswer(item, 0)}
+                    activeOpacity={0.7}
+                    style={{ paddingLeft: 15 }}>
+                    <Icon name="frown" size={40} color={item.SNRESULT == 0 ? Colors.red : item.SNRESULT == 2 ? Colors.light : Colors.light} />
                 </TouchableOpacity>
             </View>
         </ContainerRow>

@@ -16,7 +16,7 @@ export default ButtonSquare = ({ label, icon, rota, sublabel }) => {
             activeOpacity={0.7}>
             <Icon name={icon} size={50} color={Colors.white} />
             <Title weight="bold" top="5px" font="26px" color={Colors.white}>{label}</Title>
-            <Title weight="bold" font="16px" color={Colors.white}>{sublabel}</Title>
+            {/* {label && <Title weight="bold" font="16px" color={Colors.white}>{sublabel}</Title>} */}
         </TouchableOpacity>
     )
 }

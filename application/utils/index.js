@@ -48,5 +48,16 @@ export const storeUserInfo = async (user) => {
 export const removeUser = async () => {
     try {
       await AsyncStorage.removeItem(USER_KEY);
+      await AsyncStorage.removeItem(USER_KEY_DIGITAL);
     } catch (e) { }
+}
+
+//Responsavel por limitar 4 perguntas por scroll
+export const separarItemScroll = (base, max) => {
+  var res = [];
+
+  for (var i = 0; i < base.length; i = i + (max)) {
+      res.push(base.slice(i, (i + max)));
   }
+  return res;
+}    

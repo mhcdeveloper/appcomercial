@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import header from './header';
+import questions from './questions';
 
 export default combineReducers({
-    header
+    questions
 });

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Form } from '@unform/mobile';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 
@@ -10,50 +10,28 @@ import { login, loginWithDigital } from '../../services/loginService';
 import { ActivityIndicator, Alert } from 'react-native';
 import { Content, Title } from '../../styles';
 import { storeUserInfo, getUserInfo } from '../../utils';
+import { AuthContext } from '../../Context';
 
 export default function SignIn() {
+  const { signIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const formRef = useRef(null);
   const { navigate } = useNavigation();
 
-  useEffect(() => {
-    loginDigital();
-  }, []);
-
-  async function loginDigital() {
-    let user = await getUserInfo();
-    if (user) {
-      FingerprintScanner
-        .authenticate({ description: 'Autenticar com biometria, Posicione o dedo no leitor' })
-        .then(async (res) => {
-          setLoading(true)
-          await login(user).then(_ => {
-            setLoading(false);
-            navigate('Home');
-          }).catch(err => setLoading(false))
-        })
-        .catch((error) => {
-          setLoading(false);
-        });
-    }
-  }
-
   async function handleSubmit(data) {
-    navigate('Home')
-    // setLoading(true);
-    // await login(data).then(res => {
-    //   setLoading(false);
-    //   storeUserInfo(JSON.stringify(data)).then(_ => navigate('Home'));
-    // }).catch(err => {
-    //   console.log(err)
-    //   Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
-    //     {
-    //       text: "ok",
-    //       onPress: () => null,
-    //       style: "cancel"
-    //     }]);
-    //   setLoading(false)
-    // })
+    setLoading(true);
+    await login(data).then(res => {
+      setLoading(false);
+      storeUserInfo(JSON.stringify(data)).then(_ => signIn());
+    }).catch(err => {
+      Alert.alert("Falha no login.", "E-mail ou senha inválidos.", [
+        {
+          text: "ok",
+          onPress: () => null,
+          style: "cancel"
+        }]);
+      setLoading(false)
+    })
   }
 
   return (

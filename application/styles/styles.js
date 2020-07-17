@@ -8,9 +8,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    containerRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: "center"
+    },
     containerBlack: {
         flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.6)'
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        zIndex: 5
+    },
+    containerIcon: {
+        width: 50,
+        height: 50,
+        position: 'absolute',
+        justifyContent: "center",
+        alignItems: "center",
+        top: -25,
+        right: 15,
+        backgroundColor: Colors.primary,
+        borderRadius: 50
     },
     imageBackground: {
         flex: 1,
