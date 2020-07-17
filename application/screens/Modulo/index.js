@@ -9,7 +9,7 @@ import ComboBox from '../../components/ComboBox';
 import { getModulos, getChecklist } from '../../services';
 import Loading from '../../components/Loading';
 import { useDispatch } from 'react-redux';
-import { setModulo } from '../../store/Actions/QuestionActions';
+import { setModulo, setQuestionList } from '../../store/Actions/QuestionActions';
 
 const Modulo = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -48,7 +48,8 @@ const Modulo = ({ navigation }) => {
     }
 
     async function handleQuestion(value, index) {
-        navigation.navigate('CheckList', { formulario: formularios[index] });
+        dispatch(setQuestionList(formularios[index].questions));
+        navigation.navigate('CheckList');
     }
 
     return (

@@ -8,7 +8,7 @@ export default BtnFull = ({ backgroundColor, onSubmit, label, padding, font, dis
     <View style={{ position: 'absolute', bottom: 0, right: 0, left: 0 }}>
         <ButtonFull 
             disabled={disabled}
-            backgroundColor={backgroundColor}
+            backgroundColor={disabled ? Colors.light : backgroundColor}
             activeOpacity={0.7}
             padding={padding}
             onPress={() => onSubmit()}>

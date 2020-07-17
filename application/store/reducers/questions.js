@@ -1,9 +1,21 @@
-import { SET_ANSWER, RESET_ANSWER, SET_IMAGE, RESET_IMAGE, REMOVE_IMAGE, SET_MODULO } from "../consts";
+import { 
+    SET_ANSWER, 
+    RESET_ANSWER, 
+    SET_IMAGE, 
+    RESET_IMAGE, 
+    REMOVE_IMAGE, 
+    SET_MODULO, 
+    RESPONSE,
+    QUESTION_LIST,
+    SET_RESPONSE_ITEM 
+} from "../consts";
 
 const INITIAL_STATE = {
     modulo: '',
     DSTEXTO: '',
     images: [],   
+    response: [],   
+    list: [],   
 }
 
 export default function questions(state = INITIAL_STATE, action) {
@@ -38,6 +50,27 @@ export default function questions(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 images: []
+            }
+        case RESPONSE:
+            return {
+                ...state,
+                response: [...state.response, payload]
+            }
+        case QUESTION_LIST:
+            return {
+                ...state,
+                list: [...payload]
+            }
+        case SET_RESPONSE_ITEM:
+            return {
+                ...state,
+                list: state.list.map(i => {
+                    if (i.IDG113 == payload.id) {
+                        i.SNINVIAB = 0;
+                        i.SNRESULT = payload.value;
+                    }
+                    return i;
+                })
             }
         default:
             return state;

@@ -4,7 +4,6 @@ import { ImageBackground, StatusBar } from 'react-native';
 import styles from '../../styles/styles';
 import { BACKGROUND_SPLASH } from '../../assets/consts';
 import Logo from '../../components/Logo';
-import { useNavigation } from '@react-navigation/native';
 import { getUserInfo } from '../../utils';
 import { login } from '../../services/loginService';
 import { AuthContext } from '../../Context';

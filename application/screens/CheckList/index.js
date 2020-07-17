@@ -11,25 +11,26 @@ import QuestionItem from './QuestionItem';
 import AlertScreen from '../../components/AlertScreen';
 import ModalAlert from '../../components/Modals';
 import Camera from '../../components/Camera';
-import { setImage, resetImage, setAnswer } from '../../store/Actions/QuestionActions';
-import { separarItemScroll } from '../../utils';
+import { setImage, resetImage, setAnswer, setResponse, setResponseItem } from '../../store/Actions/QuestionActions';
+import { separarItemScroll, getUser } from '../../utils';
 
 const width = Dimensions.get('window').width;
 
 const CheckList = ({ route }) => {
     const dispatch = useDispatch();
     const questions = useSelector(state => state.questions);
+    const [IDS001, setIDS001] = useState(false);
     const [questionsList, setQuestion] = useState([]);
     const [alert, setAlert] = useState(false);
     const [type, setType] = useState('');
     const [open, setOpen] = useState(false);
     const [selectedQuestion, setselectedQuestion] = useState(false);
     const [anexo, setAnexo] = useState(false);
+    let validToFinish = questions.list.reduce((acumulador, item) => acumulador + item.SNINVIAB, 0) > 0 ? true : false;
 
     useEffect(() => {
-        const { formulario } = route.params;    
-        setQuestion(separarItemScroll(formulario.questions, 4));
-    }, []);    
+        getUser().then(user => setIDS001(user.IDS001));
+    }, []);
 
     function resetModal() {
         setOpen(!open);
@@ -40,7 +41,7 @@ const CheckList = ({ route }) => {
     //Seta positivo ou negativo e abre o modal pra responder
     function changeAnswer(item, type) {
         setOpen(true);
-        setType(type);    
+        setType(type);
         setselectedQuestion(item);
     }
 
@@ -54,24 +55,41 @@ const CheckList = ({ route }) => {
     //Grava a resposta da pergunta
     function handleQuestion() {
         let answer = {
+            IDS001,
             IDSEQUEN: `${selectedQuestion.IDG112}, ${selectedQuestion.IDG113}`,
             IDG114: selectedQuestion.IDG114,
             SNRESULT: type, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
         }
-
-        console.log(answer)
+        dispatch(setResponse(answer));
+        dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: type }));
+        resetModal();
     }
 
     function finalizarChecklist() {
+        console.log(questions)
+    }
 
+    function renderQuestionList(data) {
+        let list = separarItemScroll(data, 4);
+        return list.map((question, index) => {
+            return (
+                <View key={index} style={{ width, alignItems: 'center' }}>
+                    {question.map((item, index) => {
+                        return (
+                            <QuestionItem key={index} item={item} changeAnswer={changeAnswer} />
+                        )
+                    })}
+                </View>
+            )
+        });
     }
 
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
             <Header setMenu={(show) => handleShowMenu(show)} />
-            {anexo && 
+            {anexo &&
                 <Camera
                     closeCamera={() => setAnexo(false)}
                     setCanhoto={handleCanhoto}
@@ -81,8 +99,8 @@ const CheckList = ({ route }) => {
                     height="99%"
                 />
             }
-            {open && 
-                <ModalAlert  
+            {open &&
+                <ModalAlert
                     type={type}
                     item={selectedQuestion}
                     takePicture={() => {
@@ -90,7 +108,7 @@ const CheckList = ({ route }) => {
                         setOpen(false);
                     }}
                     closeModal={resetModal}
-                    handleQuestion={handleQuestion}/>                
+                    handleQuestion={handleQuestion} />
             }
             <ContentMain>
                 {alert ?
@@ -107,25 +125,14 @@ const CheckList = ({ route }) => {
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                             horizontal>
-                            {
-                                questionsList.map((question, index) => {
-                                    return (
-                                        <View key={index} style={{ width, alignItems: 'center' }}>
-                                            {question.map((item, index) => {
-                                                return (
-                                                    <QuestionItem key={index} item={item} changeAnswer={changeAnswer} />
-                                                )
-                                            })}
-                                        </View>
-                                    )
-                                })
-                            }
+                            {renderQuestionList(questions.list)}
                         </ContainerScroll>
-                        <BtnFull 
-                            padding="10px" 
-                            label="Finalizar Checklist" 
-                            font="28px" 
-                            onSubmit={finalizarChecklist} 
+                        <BtnFull
+                            // disabled={validToFinish}
+                            padding="10px"
+                            label="Finalizar Checklist"
+                            font="28px"
+                            onSubmit={finalizarChecklist}
                         />
                     </>
                 }
