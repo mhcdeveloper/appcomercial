@@ -7,7 +7,8 @@ import {
     SET_MODULO, 
     RESPONSE,
     QUESTION_LIST,
-    SET_RESPONSE_ITEM 
+    SET_RESPONSE_ITEM ,
+    RESET_RESPONSE
 } from "../consts";
 
 const INITIAL_STATE = {
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
     DSTEXTO: '',
     images: [],   
     response: [],   
+    anexos: [],   
     list: [],   
 }
 
@@ -54,7 +56,14 @@ export default function questions(state = INITIAL_STATE, action) {
         case RESPONSE:
             return {
                 ...state,
-                response: [...state.response, payload]
+                response: [...state.response, payload],
+                anexos: [...state.images]
+            }
+        case RESET_RESPONSE:
+            return {
+                ...state,
+                response: [],
+                anexos: []
             }
         case QUESTION_LIST:
             return {

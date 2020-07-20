@@ -1,4 +1,4 @@
-import { SET_MODULO, SET_ANSWER, SET_IMAGE, REMOVE_IMAGE, RESET_IMAGE, RESPONSE, QUESTION_LIST, SET_RESPONSE_ITEM } from '../consts';
+import { SET_MODULO, SET_ANSWER, SET_IMAGE, REMOVE_IMAGE, RESET_IMAGE, RESPONSE, QUESTION_LIST, SET_RESPONSE_ITEM, RESET_RESPONSE } from '../consts';
 
 export const setModulo = (payload) => ({
     type: SET_MODULO,
@@ -27,6 +27,11 @@ export const resetImage = (payload) => ({
 
 export const setResponse = (payload) => ({
     type: RESPONSE,
+    payload
+});
+
+export const setResetResponse = (payload) => ({
+    type: RESET_RESPONSE,
     payload
 });
 

@@ -11,16 +11,19 @@ import QuestionItem from './QuestionItem';
 import AlertScreen from '../../components/AlertScreen';
 import ModalAlert from '../../components/Modals';
 import Camera from '../../components/Camera';
-import { setImage, resetImage, setAnswer, setResponse, setResponseItem } from '../../store/Actions/QuestionActions';
+import { setImage, resetImage, setAnswer, setResponse, setResponseItem, setResetResponse } from '../../store/Actions/QuestionActions';
 import { separarItemScroll, getUser } from '../../utils';
+import { salvarResposta, salvarAnexosResposta } from '../../services';
+import Loading from '../../components/Loading';
 
 const width = Dimensions.get('window').width;
 
-const CheckList = ({ route }) => {
+const CheckList = ({ route, navigation }) => {
     const dispatch = useDispatch();
     const questions = useSelector(state => state.questions);
     const [IDS001, setIDS001] = useState(false);
     const [questionsList, setQuestion] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState(false);
     const [type, setType] = useState('');
     const [open, setOpen] = useState(false);
@@ -47,7 +50,12 @@ const CheckList = ({ route }) => {
 
     //Seta o canhoto na store e abre o modal de novo
     function handleCanhoto(canhoto) {
-        dispatch(setImage(canhoto));
+        let anexo = {
+            IDG114: selectedQuestion.IDG114,
+            base64: canhoto.base64,
+            DSMIMETP: 'image/jpeg'
+        }
+        dispatch(setImage(anexo));
         setAnexo(false);
         setOpen(true);
     }
@@ -56,7 +64,6 @@ const CheckList = ({ route }) => {
     function handleQuestion() {
         let answer = {
             IDS001,
-            IDSEQUEN: `${selectedQuestion.IDG112}, ${selectedQuestion.IDG113}`,
             IDG114: selectedQuestion.IDG114,
             SNRESULT: type, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
@@ -66,8 +73,29 @@ const CheckList = ({ route }) => {
         resetModal();
     }
 
-    function finalizarChecklist() {
-        console.log(questions)
+    async function finalizarChecklist() {
+        const { response, anexos } = questions;
+        if (response.length > 0) {
+            await salvarResposta(response)
+                .then(async success => {
+                    if (success.IDSEQUEN && anexos.length > 0) {
+                        await salvarAnexosResposta(anexos, success.IDSEQUEN)
+                            .then(uploaded => {
+                                setAlert(1);
+                                dispatch(setResetResponse());
+                            })
+                            .catch(err => {
+                                setAlert(0);
+                            })
+                    } else {
+                        setAlert(1);
+                        dispatch(setResetResponse());
+                    }
+                })
+                .catch(err => {
+                    setAlert(0);
+                })
+        }
     }
 
     function renderQuestionList(data) {
@@ -110,33 +138,39 @@ const CheckList = ({ route }) => {
                     closeModal={resetModal}
                     handleQuestion={handleQuestion} />
             }
-            <ContentMain>
-                {alert ?
-                    <AlertScreen
-                        icon="exclamation-circle"
-                        color={Colors.red}
-                        alert="Não Liberado"
-                        message="Seu caminhão não está aprovado para prosseguir" />
-                    :
-                    <>
-                        <IconLabel label="Checklist" title={questions.modulo} />
-                        <ContainerScroll
-                            pagingEnabled={true}
-                            showsHorizontalScrollIndicator={false}
-                            showsVerticalScrollIndicator={false}
-                            horizontal>
-                            {renderQuestionList(questions.list)}
-                        </ContainerScroll>
-                        <BtnFull
-                            // disabled={validToFinish}
-                            padding="10px"
-                            label="Finalizar Checklist"
-                            font="28px"
-                            onSubmit={finalizarChecklist}
-                        />
-                    </>
-                }
-            </ContentMain>
+            {loading
+                ?
+                <Loading label="Gravando seu checklist..." />
+                :
+                <ContentMain>
+                    {alert ?
+                        <AlertScreen
+                            handleSubmit={() => alert == 1 ? navigation.navigate('Modulo') : setAlert(false)}
+                            icon="exclamation-circle"
+                            color={alert == 1 ? Colors.green : Colors.red}
+                            alert={alert == 1 ? "Liberado" : "Não Liberado"}
+                            message={alert == 1 ? selectedQuestion.DSLIBSIM : selectedQuestion.DSLIBNAO} />
+                        :
+                        <>
+                            <IconLabel label="Checklist" title={questions.modulo} />
+                            <ContainerScroll
+                                pagingEnabled={true}
+                                showsHorizontalScrollIndicator={false}
+                                showsVerticalScrollIndicator={false}
+                                horizontal>
+                                {renderQuestionList(questions.list)}
+                            </ContainerScroll>
+                            <BtnFull
+                                disabled={validToFinish}
+                                padding="10px"
+                                label="Finalizar Checklist"
+                                font="28px"
+                                onSubmit={finalizarChecklist}
+                            />
+                        </>
+                    }
+                </ContentMain>
+            }
         </Container>
     )
 }

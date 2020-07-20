@@ -8,5 +8,6 @@ export const SET_IMAGE = 'SET_IMAGE';
 export const RESET_IMAGE = 'RESET_IMAGE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const RESPONSE = 'RESPONSE';
+export const RESET_RESPONSE = 'RESET_RESPONSE';
 export const QUESTION_LIST = 'QUESTION_LIST';
 export const SET_RESPONSE_ITEM = 'SET_RESPONSE_ITEM';
