@@ -83,6 +83,7 @@ const CheckList = ({ route, navigation }) => {
                             .then(uploaded => {
                                 setAlert(1);
                                 dispatch(setResetResponse());
+                                dispatch(setQuestionList([]));
                             })
                             .catch(err => {
                                 setAlert(0);

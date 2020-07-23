@@ -24,7 +24,10 @@ const Modulo = ({ navigation }) => {
     useEffect(() => {
         listModulos();
         getUserAuth();
-        navigation.addListener('focus', () => listModulos(), setFormularios([]));
+        navigation.addListener('focus', () => {
+            listModulos(); 
+            setFormularios([]);
+        });
     }, []);
 
     async function getUserAuth() {
