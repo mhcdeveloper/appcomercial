@@ -22,14 +22,13 @@ const CheckList = ({ route, navigation }) => {
     const dispatch = useDispatch();
     const questions = useSelector(state => state.questions);
     const [IDS001, setIDS001] = useState(false);
-    const [questionsList, setQuestion] = useState([]);
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState(false);
     const [type, setType] = useState('');
     const [open, setOpen] = useState(false);
     const [selectedQuestion, setselectedQuestion] = useState(false);
     const [anexo, setAnexo] = useState(false);
-    let validToFinish = questions.list.reduce((acumulador, item) => acumulador + item.SNINVIAB, 0) > 0 ? true : false;
+    let validToFinish = questions.list.length > questions.response.length ? true : false;
 
     useEffect(() => {
         getUser().then(user => setIDS001(user.IDS001));
@@ -67,6 +66,7 @@ const CheckList = ({ route, navigation }) => {
             IDG114: selectedQuestion.IDG114,
             SNRESULT: type, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
+            INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? SNRESULT == 0 ? true: false : false 
         }
         dispatch(setResponse(answer));
         dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: type }));
@@ -81,7 +81,7 @@ const CheckList = ({ route, navigation }) => {
                     if (success.IDSEQUEN && anexos.length > 0) {
                         await salvarAnexosResposta(anexos, success.IDSEQUEN)
                             .then(uploaded => {
-                                setAlert(1);
+                                setAlert(success.SNINVIAB ? 0 : 1);
                                 dispatch(setResetResponse());
                                 dispatch(setQuestionList([]));
                             })
@@ -89,7 +89,7 @@ const CheckList = ({ route, navigation }) => {
                                 setAlert(0);
                             })
                     } else {
-                        setAlert(1);
+                        setAlert(success.SNINVIAB ? 0 : 1);
                         dispatch(setResetResponse());
                     }
                 })

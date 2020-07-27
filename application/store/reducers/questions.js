@@ -57,7 +57,7 @@ export default function questions(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 response: [...state.response, payload],
-                anexos: [...state.images]
+                anexos: [...state.anexos, ...state.images]
             }
         case RESET_RESPONSE:
             return {
