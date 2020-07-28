@@ -11,7 +11,7 @@ import QuestionItem from './QuestionItem';
 import AlertScreen from '../../components/AlertScreen';
 import ModalAlert from '../../components/Modals';
 import Camera from '../../components/Camera';
-import { setImage, resetImage, setAnswer, setResponse, setResponseItem, setResetResponse } from '../../store/Actions/QuestionActions';
+import { setImage, resetImage, setAnswer, setResponse, setResponseItem, setResetResponse, setQuestionList } from '../../store/Actions/QuestionActions';
 import { separarItemScroll, getUser } from '../../utils';
 import { salvarResposta, salvarAnexosResposta } from '../../services';
 import Loading from '../../components/Loading';
@@ -66,7 +66,7 @@ const CheckList = ({ route, navigation }) => {
             IDG114: selectedQuestion.IDG114,
             SNRESULT: type, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
-            INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? SNRESULT == 0 ? true: false : false 
+            INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? type == 0 ? true: false : false 
         }
         dispatch(setResponse(answer));
         dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: type }));
@@ -75,26 +75,35 @@ const CheckList = ({ route, navigation }) => {
 
     async function finalizarChecklist() {
         const { response, anexos } = questions;
+        setLoading(true);
         if (response.length > 0) {
             await salvarResposta(response)
                 .then(async success => {
+                    console.log(success)
                     if (success.IDSEQUEN && anexos.length > 0) {
                         await salvarAnexosResposta(anexos, success.IDSEQUEN)
                             .then(uploaded => {
-                                setAlert(success.SNINVIAB ? 0 : 1);
+                                setAlert(success.SNINVIAB ? 2 : 1);
                                 dispatch(setResetResponse());
                                 dispatch(setQuestionList([]));
+                                setLoading(false);
                             })
                             .catch(err => {
                                 setAlert(0);
+                                setLoading(false);
                             })
                     } else {
-                        setAlert(success.SNINVIAB ? 0 : 1);
+                        console.log('aqui')
+                        setAlert(success.SNINVIAB ? 2 : 1);
                         dispatch(setResetResponse());
+                        dispatch(setQuestionList([]));
+                        setLoading(false);
                     }
                 })
                 .catch(err => {
+                    console.log(err)
                     setAlert(0);
+                    setLoading(false);
                 })
         }
     }
@@ -114,6 +123,7 @@ const CheckList = ({ route, navigation }) => {
         });
     }
 
+    console.log(alert)
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
@@ -146,8 +156,8 @@ const CheckList = ({ route, navigation }) => {
                 <ContentMain>
                     {alert ?
                         <AlertScreen
-                            handleSubmit={() => alert == 1 ? navigation.navigate('Modulo') : setAlert(false)}
-                            icon="exclamation-circle"
+                            handleSubmit={() => navigation.navigate('Modulo')}
+                            icon={alert == 1 ? "check-circle" : "exclamation-circle"}
                             color={alert == 1 ? Colors.green : Colors.red}
                             alert={alert == 1 ? "Liberado" : "Não Liberado"}
                             message={alert == 1 ? selectedQuestion.DSLIBSIM : selectedQuestion.DSLIBNAO} />

@@ -22,12 +22,13 @@ export default ModalAlert = ({ closeModal, takePicture, handleQuestion, item, ty
         if (type == 1) {
             const { SNFOTOPO, SNTEXTPO } = item;
             validFoto = SNFOTOPO == 1 ? questions.images.length > 0 ? true : false : true;
-            validText = SNTEXTPO == 1 ? questions.DSTEXTO != '' ? true : false : true;
+            validText = SNTEXTPO == 1 ? questions.DSTEXTO.length > 0 ? true : false : true;
         } else {
             const { SNFOTONE, SNTEXTNE } = item;
-            validFoto = SNFOTONE == 1 ? questions.images.length > 0 ? true : false : true;
-            validText = SNTEXTNE == 1 ? questions.DSTEXTO != '' ? true : false : true;
+            validFoto = SNFOTONE == 1 ? (questions.images.length > 0 ? true : false) : true;
+            validText = SNTEXTNE == 1 ? (questions.DSTEXTO.length > 0 ? true : false) : true;
         }
+
 
         return (
             <ContainerModal backgroundColor={Colors.white}>
