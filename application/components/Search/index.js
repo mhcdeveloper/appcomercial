@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { ContainerRow, Title } from '../../styles';
 import { ActivityIndicator } from 'react-native';
 import Colors from '../../styles/Colors';
 import useDebounce from '../Input/useDebounce';
-import { filtrarProdutos } from '../../services';
+import { getFilters } from '../../services';
+import { setFilterResponse } from '../../store/Actions/QuestionActions';
 
-export default Search = ({ handleChange }) => {
+export default Search = ({ filter }) => {
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [dados, setDados] = useState(false);
     const [name, setName] = useState('');
@@ -25,14 +28,14 @@ export default Search = ({ handleChange }) => {
 
     async function searchDados() {
         setLoading(true);
-        filtrarProdutos(name).then(produtos => {            
-            setDados(produtos);
+        getFilters(filter.SQL, name).then(data => {
+            setDados(data);
             setLoading(false);
         }).catch(err => setLoading(false));
     }
 
-    function changeProduto(prod) {
-        handleChange(prod);
+    function changeData(d) {
+        dispatch(setFilterResponse([{ IDS007: filter.IDS007, d }]));
         setDados(false);
     }
 
@@ -53,16 +56,17 @@ export default Search = ({ handleChange }) => {
                 elevation={10}
                 borderColor={Colors.light}
             >
+                <TextInput
+                    autoCapitalize
+                    style={custom.inputText}
+                    placeholder={`Pesquise os(a) ${filter.DSTABELA}`}
+                    onChangeText={(nome) => setName(nome)} />
                 {loading
                     ?
                     <ActivityIndicator size="large" color={Colors.primary} />
                     :
-                    <Icon name="search" size={28} color={Colors.regular} style={custom.icon} />
+                    <Icon name="sort-down" size={28} color={Colors.regular} style={custom.icon} />
                 }
-                <TextInput
-                    style={custom.inputText}
-                    placeholder="Digite aqui"
-                    onChangeText={(nome) => setName(nome)} />
             </ContainerRow>
             {dados &&
                 <ScrollView
@@ -73,10 +77,10 @@ export default Search = ({ handleChange }) => {
                             return (
                                 <TouchableOpacity
                                     key={index}
-                                    onPress={() => changeProduto(cli)}
+                                    onPress={() => changeData(cli)}
                                     style={custom.btnSelect}
                                     activeOpacity={0.7}>
-                                    <Title key={index} align="left" color={Colors.regular}>{cli.DSPRODUT}</Title>
+                                    <Title key={index} align="left" color={Colors.regular}>{cli.VALUE}</Title>
                                 </TouchableOpacity>
                             )
                         })
@@ -91,7 +95,6 @@ export default Search = ({ handleChange }) => {
 
 const custom = StyleSheet.create({
     scroll: {
-        backgroundColor: Colors.hight,
         left: 0,
         right: 0,
         height: 300,
@@ -104,8 +107,12 @@ const custom = StyleSheet.create({
         borderColor: Colors.lighter,
     },
     inputText: {
-        width: '85%',
+        width: '87%',
         fontSize: 20,
         color: Colors.regular
+    },
+    icon: {
+        width: '13%',
+        paddingLeft: 10,
     },
 });

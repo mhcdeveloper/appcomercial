@@ -8,7 +8,9 @@ import {
     RESPONSE,
     QUESTION_LIST,
     SET_RESPONSE_ITEM ,
-    RESET_RESPONSE
+    RESET_RESPONSE,
+    SET_FILTERS,
+    SET_FILTER_RESPONSE
 } from "../consts";
 
 const INITIAL_STATE = {
@@ -18,6 +20,8 @@ const INITIAL_STATE = {
     response: [],   
     anexos: [],   
     list: [],   
+    filters: [],   
+    filterResponse: [],   
 }
 
 export default function questions(state = INITIAL_STATE, action) {
@@ -56,13 +60,15 @@ export default function questions(state = INITIAL_STATE, action) {
         case RESPONSE:
             return {
                 ...state,
-                response: [...state.response, payload],
+                response: [...state.response.filter(f => f.IDG114 != payload.IDG114), payload],
                 anexos: [...state.anexos, ...state.images]
             }
         case RESET_RESPONSE:
             return {
                 ...state,
                 response: [],
+                filters: [],
+                filterResponse: [],
                 anexos: []
             }
         case QUESTION_LIST:
@@ -80,6 +86,17 @@ export default function questions(state = INITIAL_STATE, action) {
                     }
                     return i;
                 })
+            }
+        case SET_FILTERS:
+            return {
+                ...state,
+                filters: [],
+                filters: [...payload]
+            }
+        case SET_FILTER_RESPONSE:
+            return {
+                ...state,
+                filterResponse: [...payload]
             }
         default:
             return state;

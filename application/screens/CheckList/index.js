@@ -61,12 +61,15 @@ const CheckList = ({ route, navigation }) => {
 
     //Grava a resposta da pergunta
     function handleQuestion() {
+        const { filterResponse } = questions;
+        let DSVALUE = filterResponse.filter(filter => filter.IDS007 == selectedQuestion.IDS007)[0].d.ID;
         let answer = {
             IDS001,
             IDG114: selectedQuestion.IDG114,
             SNRESULT: type, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
-            INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? type == 0 ? true: false : false 
+            INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? type == 0 ? true : false : false,
+            DSVALUE
         }
         dispatch(setResponse(answer));
         dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: type }));
@@ -79,7 +82,6 @@ const CheckList = ({ route, navigation }) => {
         if (response.length > 0) {
             await salvarResposta(response)
                 .then(async success => {
-                    console.log(success)
                     if (success.IDSEQUEN && anexos.length > 0) {
                         await salvarAnexosResposta(anexos, success.IDSEQUEN)
                             .then(uploaded => {
@@ -93,7 +95,6 @@ const CheckList = ({ route, navigation }) => {
                                 setLoading(false);
                             })
                     } else {
-                        console.log('aqui')
                         setAlert(success.SNINVIAB ? 2 : 1);
                         dispatch(setResetResponse());
                         dispatch(setQuestionList([]));
@@ -101,7 +102,6 @@ const CheckList = ({ route, navigation }) => {
                     }
                 })
                 .catch(err => {
-                    console.log(err)
                     setAlert(0);
                     setLoading(false);
                 })
@@ -123,7 +123,6 @@ const CheckList = ({ route, navigation }) => {
         });
     }
 
-    console.log(alert)
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />

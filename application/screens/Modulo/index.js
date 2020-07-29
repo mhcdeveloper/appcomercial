@@ -9,7 +9,7 @@ import ComboBox from '../../components/ComboBox';
 import { getModulos, getChecklist } from '../../services';
 import Loading from '../../components/Loading';
 import { useDispatch } from 'react-redux';
-import { setModulo, setQuestionList } from '../../store/Actions/QuestionActions';
+import { setModulo, setQuestionList, setFilters } from '../../store/Actions/QuestionActions';
 import { getUser } from '../../utils';
 
 const Modulo = ({ navigation }) => {
@@ -62,8 +62,9 @@ const Modulo = ({ navigation }) => {
     }
 
     async function handleQuestion(value, index) {
+        dispatch(setFilters(formularios[index].filter));
         dispatch(setQuestionList(formularios[index].questions));
-        navigation.navigate('CheckList');
+        navigation.navigate('Filter');
     }
 
     return (

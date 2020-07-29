@@ -4,6 +4,27 @@ import api from './api';
 
 const CancelToken = axios.CancelToken;
 
+export const getFilters = async (sql, name) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const source = CancelToken.source();
+            let response = null;
+            setTimeout(() => {
+                if (response === null) {
+                    source.cancel();
+                }
+            }, 14000);
+            response = await api.post('/api/mobile/checklist/filters', { sql, name }).then(async data => {
+                resolve(data.data);
+            }).catch(err => {
+                reject(false);
+            })
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 export const getModulos = async () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -99,3 +120,4 @@ export const salvarAnexosResposta = async (images, IDSEQUEN) => {
         }
     });
 }
+

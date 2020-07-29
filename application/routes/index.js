@@ -9,6 +9,7 @@ import Home from '../screens/Home';
 import CheckList from '../screens/CheckList';
 import Modulo from '../screens/Modulo';
 import { AuthContext } from '../Context';
+import Filter from '../screens/Filter';
 
 const AppStack = createStackNavigator();
 const AppStackScreen = () => (
@@ -16,6 +17,7 @@ const AppStackScreen = () => (
         <AppStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <AppStack.Screen name="CheckList" component={CheckList} options={{ headerShown: false }} />
         <AppStack.Screen name="Modulo" component={Modulo} options={{ headerShown: false }} />
+        <AppStack.Screen name="Filter" component={Filter} options={{ headerShown: false }} />
     </AppStack.Navigator>
 )
 
