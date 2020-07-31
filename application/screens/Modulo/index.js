@@ -64,7 +64,11 @@ const Modulo = ({ navigation }) => {
     async function handleQuestion(value, index) {
         dispatch(setFilters(formularios[index].filter));
         dispatch(setQuestionList(formularios[index].questions));
-        navigation.navigate('Filter');
+        if(formularios[index].filter.length == 0) {
+            navigation.navigate('CheckList');
+        } else {
+            navigation.navigate('Filter');
+        }
     }
 
     return (

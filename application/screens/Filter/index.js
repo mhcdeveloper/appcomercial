@@ -14,6 +14,7 @@ import { getUser } from '../../utils';
 const Filter = ({ navigation }) => {
     const questions = useSelector(state => state.questions);
     const [user, setUser] = useState({});
+    let validBtn = questions.filterResponse.length == questions.filters.length ? false : true;
 
     useEffect(() => {
         getUserAuth();
@@ -41,7 +42,7 @@ const Filter = ({ navigation }) => {
                     ))}
                 </ScrollView>
                 <BtnFull
-                    disabled={questions.filterResponse.length != questions.filters.length}
+                    disabled={validBtn}
                     padding="10px"
                     label="Prosseguir"
                     font="28px"

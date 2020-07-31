@@ -62,7 +62,7 @@ const CheckList = ({ route, navigation }) => {
     //Grava a resposta da pergunta
     function handleQuestion() {
         const { filterResponse } = questions;
-        let DSVALUE = filterResponse.filter(filter => filter.IDS007 == selectedQuestion.IDS007)[0].d.ID;
+        let DSVALUE = filterResponse.length > 0 ? filterResponse.filter(filter => filter.IDS007 == selectedQuestion.IDS007)[0].d.ID : null;
         let answer = {
             IDS001,
             IDG114: selectedQuestion.IDG114,
