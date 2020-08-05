@@ -19,16 +19,24 @@ export default ModalAlert = ({ closeModal, takePicture, handleQuestion, item, ty
     function renderModal() {
         let validFoto = false;
         let validText = false;
+        let validInput = false;
+        let validAnexo = false;
+
         if (type == 1) {
             const { SNFOTOPO, SNTEXTPO } = item;
             validFoto = SNFOTOPO == 1 ? questions.images.length > 0 ? true : false : true;
             validText = SNTEXTPO == 1 ? questions.DSTEXTO.length > 0 ? true : false : true;
+            validInput = SNTEXTPO == 0 ? false : true;
+            validAnexo = SNFOTOPO == 0 ? false : true;
         } else {
             const { SNFOTONE, SNTEXTNE } = item;
             validFoto = SNFOTONE == 1 ? (questions.images.length > 0 ? true : false) : true;
             validText = SNTEXTNE == 1 ? (questions.DSTEXTO.length > 0 ? true : false) : true;
+            validInput = SNTEXTNE == 0 ? false : true;
+            validAnexo = SNFOTONE == 0 ? false : true;
         }
 
+        console.log(validFoto, validText, item.SNFOTOPO)
 
         return (
             <ContainerModal backgroundColor={Colors.white}>
@@ -39,21 +47,25 @@ export default ModalAlert = ({ closeModal, takePicture, handleQuestion, item, ty
                     <Icon name="times" size={35} color={Colors.white} />
                 </TouchableOpacity>
                 <Title align="left" weight="bold" font="22px">Detalhes Checklist</Title>
-                <TextArea
-                    multiline={true}
-                    numberOfLines={4}
-                    onChangeText={(text) => dispatch(setAnswer(text))}>
-                    {questions.DSTEXTO}
-                </TextArea>
-                <BtnIcon
-                    padding="6px"
-                    label="Tirar foto"
-                    font="24px"
-                    icon="camera"
-                    backgroundColor={Colors.regular}
-                    color={Colors.white}
-                    onSubmit={() => takePicture()}
-                />
+                {validInput &&
+                    <TextArea
+                        multiline={true}
+                        numberOfLines={4}
+                        onChangeText={(text) => dispatch(setAnswer(text))}>
+                        {questions.DSTEXTO}
+                    </TextArea>
+                }
+                {validAnexo &&
+                    <BtnIcon
+                        padding="6px"
+                        label="Tirar foto"
+                        font="24px"
+                        icon="camera"
+                        backgroundColor={Colors.regular}
+                        color={Colors.white}
+                        onSubmit={() => takePicture()}
+                    />
+                }
                 {questions.images.length > 0 &&
                     <ContainerWrapper>
                         {questions.images.map((img, index) => (

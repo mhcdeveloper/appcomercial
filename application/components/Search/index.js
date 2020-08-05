@@ -11,6 +11,7 @@ import { getFilters } from '../../services';
 import { setFilterResponse } from '../../store/Actions/QuestionActions';
 
 export default Search = ({ filter }) => {
+    console.log(filter)
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [dados, setDados] = useState(false);
@@ -28,7 +29,7 @@ export default Search = ({ filter }) => {
 
     async function searchDados() {
         setLoading(true);
-        getFilters(filter.SQL, name).then(data => {
+        getFilters(filter, name).then(data => {
             setDados(data);
             setLoading(false);
         }).catch(err => setLoading(false));
@@ -57,10 +58,9 @@ export default Search = ({ filter }) => {
                 borderColor={Colors.light}
             >
                 <TextInput
-                    autoCapitalize
                     style={custom.inputText}
-                    placeholder={`Pesquise os(a) ${filter.DSTABELA}`}
-                    onChangeText={(nome) => setName(nome)} />
+                    placeholder={filter.title}
+                    onChangeText={(nome) => setName(nome.toUpperCase())} />
                 {loading
                     ?
                     <ActivityIndicator size="large" color={Colors.primary} />

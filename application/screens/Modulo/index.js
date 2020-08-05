@@ -50,10 +50,20 @@ const Modulo = ({ navigation }) => {
         dispatch(setModulo(modulos[index].label));
         setModuloSelecionado(modulos[index].label);
         getChecklist({ IDS025: modulo })
-            .then(formularios => {
-                setFormularios(formularios);
+            .then(data => {
+                setFormularios(data);
                 setLoading(false);
                 setLoadingChecklist(false);
+                if (data.length == 1) {
+                    console.log(data)
+                    dispatch(setFilters(data[0].filter));
+                    dispatch(setQuestionList(data[0].questions));
+                    if(data[0].filter.length == 0) {
+                        navigation.navigate('CheckList');
+                    } else {
+                        navigation.navigate('Filter');
+                    }
+                }                
             })
             .catch(err => {
                 setLoading(false);
