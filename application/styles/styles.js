@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
         zIndex: 5
     },
     containerIcon: {
-        width: 50,
-        height: 50,
+        width: '18%',
+        height: 40,
         position: 'absolute',
         justifyContent: "center",
         alignItems: "center",
-        top: -25,
-        right: 15,
+        top: '-12%',
+        right: '-0.2%',
         backgroundColor: Colors.primary,
         borderRadius: 50
     },
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     },
     imgHeader: {
         width,
-        height: 120,
+        height: 80,
     },
     btnGradient: {
         borderRadius: 25,

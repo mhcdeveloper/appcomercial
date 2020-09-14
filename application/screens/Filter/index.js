@@ -33,7 +33,6 @@ const Filter = ({ navigation }) => {
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
             <Header setMenu={(show) => handleShowMenu(show)} />
-
             <ContentMain>
                 <IconLabel icon="true" label="Bem Vindo," title={user.NMUSUARI} />
                 <ScrollView>
@@ -43,9 +42,8 @@ const Filter = ({ navigation }) => {
                 </ScrollView>
                 <BtnFull
                     disabled={validBtn}
-                    padding="10px"
                     label="Prosseguir"
-                    font="28px"
+                    font="20px"
                     onSubmit={handleNext}
                 />
             </ContentMain>

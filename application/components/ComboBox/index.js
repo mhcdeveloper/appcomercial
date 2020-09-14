@@ -8,7 +8,7 @@ const ComboBox = ({ options, placeholder, onChange }) => {
     <View style={styles.container}>
       <Picker
         selectedValue={selectedValue}
-        style={{ height: 50, width: '100%' }}
+        style={{ height: 40, width: '100%' }}
         itemStyle={{ marginLeft: 30 }}
         onValueChange={(itemValue, itemIndex) => {
           setSelectedValue(itemValue)
@@ -26,10 +26,11 @@ const ComboBox = ({ options, placeholder, onChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
-    margin: 10,
-    marginLeft: 25,
-    marginRight: 25,
+    height: 40,
+    margin: "0.1%",
+    marginLeft: "5%",
+    marginRight: "5%",
+    marginBottom: "2%",
     alignItems: "center",
     borderWidth: 1,
     borderColor: Colors.light,

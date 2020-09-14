@@ -39,9 +39,8 @@ const Home = ({ }) => {
                 </ContainerCenter>
                 <BtnFull
                     onSubmit={handleSubmit}
-                    padding="10px"
                     label="Sair"
-                    font="28px" />
+                    font="20px" />
             </ContentMain>
         </Container>
     )

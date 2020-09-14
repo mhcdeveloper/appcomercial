@@ -47,9 +47,9 @@ export default function Restore() {
         </Content>
         :
         <Btn
-          padding="8px"
-          font="24px"
-          label="ENVIAR"
+          padding="10px"
+          font="26px"
+          label="Enviar"
           onSubmit={() => formRef.current.submitForm()}
           backgroundColor={Colors.primary}
         />

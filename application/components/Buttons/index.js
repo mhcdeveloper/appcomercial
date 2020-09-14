@@ -11,7 +11,7 @@ export default Btn = ({ backgroundColor, onSubmit, label, padding, font, disable
             backgroundColor={backgroundColor}
             activeOpacity={0.7}
             padding={padding}
-            border="12px"
+            border="20px"
             onPress={() => onSubmit()}>
             <Title font={font} weight="bold" color={Colors.white}>{label}</Title>
         </Button>

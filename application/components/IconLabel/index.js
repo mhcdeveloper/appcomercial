@@ -8,17 +8,21 @@ import Colors from '../../styles/Colors';
 const IconLabel = ({ icon, label, title }) => {
     return (
         <>
-            <View style={styles.container}>
-                {icon && 
+            <View style={[styles.container,
+            {
+                marginLeft: icon ? "4.5%" : "1.5%",
+                marginBottom: icon ? 0 : "4.5%"
+            }]}>
+                {icon &&
                     <View style={styles.userIcon}>
                         <Icon name="user" size={40} color={Colors.white} />
                     </View>
                 }
-                <View style={styles.info}>
-                    <Title align="left" left="15px">
+                <View style={[styles.info, { width: icon ? '80%' : '100%' }]}>
+                    <Title align="left" left="15px" font="15px">
                         {label}
                     </Title>
-                    <Title font="26px" align="left" left="15px" weight="bold">
+                    <Title font="18px" align="left" left="15px" weight="bold">
                         {title}
                     </Title>
                 </View>
@@ -31,16 +35,14 @@ const IconLabel = ({ icon, label, title }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        alignItems: "center",
-        marginLeft: 25 
+        alignItems: "center"
     },
     userIcon: {
         width: '16%',
-        height: 60,
+        height: "42%",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: Colors.light,
-        padding: 10,
         borderRadius: 100
     },
     info: {

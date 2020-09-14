@@ -44,9 +44,9 @@ export default ModalAlert = ({ closeModal, takePicture, handleQuestion, item, ty
                     activeOpacity={0.8}
                     onPress={() => closeModal(false)}
                     style={styles.containerIcon}>
-                    <Icon name="times" size={35} color={Colors.white} />
+                    <Icon name="times" size={30} color={Colors.white} />
                 </TouchableOpacity>
-                <Title align="left" weight="bold" font="22px">Detalhes Checklist</Title>
+                <Title align="left" weight="bold" font="20px">Detalhes Checklist</Title>
                 {validInput &&
                     <TextArea
                         multiline={true}
@@ -57,9 +57,7 @@ export default ModalAlert = ({ closeModal, takePicture, handleQuestion, item, ty
                 }
                 {validAnexo &&
                     <BtnIcon
-                        padding="6px"
                         label="Tirar foto"
-                        font="24px"
                         icon="camera"
                         backgroundColor={Colors.regular}
                         color={Colors.white}

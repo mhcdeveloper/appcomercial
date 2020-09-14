@@ -63,8 +63,8 @@ export default function SignIn() {
         :
         <>
           <Btn
-            padding="8px"
-            font="24px"
+            padding="10px"
+            font="26px"
             label="Entrar"
             onSubmit={() => formRef.current.submitForm()}
             backgroundColor={Colors.primary}

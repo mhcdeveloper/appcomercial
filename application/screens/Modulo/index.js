@@ -55,7 +55,6 @@ const Modulo = ({ navigation }) => {
                 setLoading(false);
                 setLoadingChecklist(false);
                 if (data.length == 1) {
-                    console.log(data)
                     dispatch(setFilters(data[0].filter));
                     dispatch(setQuestionList(data[0].questions));
                     if(data[0].filter.length == 0) {
@@ -100,7 +99,7 @@ const Modulo = ({ navigation }) => {
                             options={formularios}
                             onChange={handleQuestion} />
                         :
-                        moduloSelecionado && <Title>Nenhum formulário encontrado</Title>
+                        moduloSelecionado && <Title font="16px" top="5%">Nenhum formulário encontrado</Title>
                     }
                 </ContentMain>
             }

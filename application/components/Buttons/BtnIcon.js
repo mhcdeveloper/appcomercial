@@ -16,7 +16,7 @@ export default BtnIcon = ({ backgroundColor, onSubmit, label, padding, font, dis
             padding={padding}
             onPress={() => onSubmit()}>
             <View style={styles.containerRow}>
-                <Icon name={icon} size={32} color={color} style={{ marginRight: 20 }} />
+                <Icon name={icon} size={26} color={color} style={{ marginRight: "4%" }} />
                 <Title font={font} weight="bold" color={color}>{label}</Title>            
             </View>
         </Button>

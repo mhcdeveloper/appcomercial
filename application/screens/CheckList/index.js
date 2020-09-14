@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, Dimensions } from 'react-native';
+import { View, StatusBar, Dimensions, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, ContentMain, ContainerScroll } from '../../styles';
@@ -82,8 +82,8 @@ const CheckList = ({ route, navigation }) => {
         if (response.length > 0) {
             await salvarResposta(response)
                 .then(async success => {
-                    if (success.IDSEQUEN && anexos.length > 0) {
-                        await salvarAnexosResposta(anexos, success.IDSEQUEN)
+                    if (success.IDG115 && anexos.length > 0) {
+                        await salvarAnexosResposta(anexos, success.IDG115)
                             .then(uploaded => {
                                 setAlert(success.SNINVIAB ? 2 : 1);
                                 dispatch(setResetResponse());
@@ -112,13 +112,13 @@ const CheckList = ({ route, navigation }) => {
         let list = separarItemScroll(data, 4);
         return list.map((question, index) => {
             return (
-                <View key={index} style={{ width, alignItems: 'center' }}>
+                <ScrollView key={index} style={{ width }}>
                     {question.map((item, index) => {
                         return (
                             <QuestionItem key={index} item={item} changeAnswer={changeAnswer} />
                         )
                     })}
-                </View>
+                </ScrollView>
             )
         });
     }
@@ -172,9 +172,8 @@ const CheckList = ({ route, navigation }) => {
                             </ContainerScroll>
                             <BtnFull
                                 disabled={validToFinish}
-                                padding="10px"
                                 label="Finalizar Checklist"
-                                font="28px"
+                                font="20px"
                                 onSubmit={finalizarChecklist}
                             />
                         </>

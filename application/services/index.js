@@ -91,12 +91,12 @@ export const salvarResposta = async (data) => {
     });
 }
 
-export const salvarAnexosResposta = async (images, IDSEQUEN) => {
+export const salvarAnexosResposta = async (images, IDG115) => {
     return new Promise(async (resolve, reject) => {
         for (const [index, img] of images.entries()) {
             const anexo = new FormData();
             anexo.append('IDG114', img.IDG114);
-            anexo.append('IDSEQUEN', IDSEQUEN);
+            anexo.append('IDG115', IDG115);
             anexo.append('DSMIMETP', img.DSMIMETP);
             anexo.append('ANFOTO', img.base64);
             try {

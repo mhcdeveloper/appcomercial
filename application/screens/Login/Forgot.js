@@ -30,14 +30,14 @@ export default Forgot = ({ navigation }) => {
                     <StatusBar hidden />
                     <Logo />
                     <Container
-                        marginLeft="10%"
-                        marginRight="10%"
+                        marginLeft="6%"
+                        marginRight="6%"
                         backgroundColor={Colors.transparent}>
-                        <Title color={Colors.white} bottom="10px">Recuperar Senha</Title>
+                        <Title font="22px" weight="bold" color={Colors.white} bottom="10px">Recuperar Senha</Title>
                         <Restore />
                     </Container>
                     <ContainerFooter>
-                        <Title onPress={() => navigation.goBack()} top="10px" bottom="10px" color={Colors.white}>Ir para Login</Title>
+                        <Title onPress={() => navigation.goBack()} top="10px" bottom="10px" color={Colors.white}>Voltar para Login</Title>
                     </ContainerFooter>
                 </ContainerScroll>
             </SafeContainer>

@@ -16,11 +16,13 @@ export default Search = ({ filter }) => {
     const [loading, setLoading] = useState(false);
     const [dados, setDados] = useState(false);
     const [name, setName] = useState('');
+    const [selected, setSelected] = useState(false);
 
     const debouncedSearch = useDebounce(name, 2000);
 
     useEffect(() => {
         if (debouncedSearch) {
+            setSelected(false);
             searchDados();
         } else {
             setDados(false)
@@ -38,20 +40,19 @@ export default Search = ({ filter }) => {
     function changeData(d) {
         dispatch(setFilterResponse([{ IDS007: filter.IDS007, d }]));
         setDados(false);
+        setSelected(d.VALUE);
     }
 
     return (
-        <View>
+        <View style={{ marginTop: "0.5%" }}>
             <ContainerRow
                 justifyContent="flex-start"
                 backgroundColor={Colors.white}
                 borderRadius={35}
-                marginLeft="20px"
-                marginRight="20px"
-                paddingLeft="10px"
-                paddingRight="10px"
-                paddingTop="4px"
-                paddingBottom="4px"
+                marginLeft="5%"
+                marginRight="5%"
+                paddingLeft="2.0%"
+                paddingRight="2.0%"
                 borderWidth={1}
                 zIndex={100}
                 elevation={10}
@@ -89,6 +90,7 @@ export default Search = ({ filter }) => {
                     }
                 </ScrollView>
             }
+            {selected && <Title top="10px">Selecionado - {selected}</Title>}
         </View>
     )
 }
@@ -98,11 +100,11 @@ const custom = StyleSheet.create({
         left: 0,
         right: 0,
         height: 300,
-        marginLeft: 25,
-        marginRight: 25,
+        marginLeft: "5.5%",
+        marginRight: "5.5%",
     },
     btnSelect: {
-        padding: 24,
+        padding: "5%",
         borderWidth: 1,
         borderColor: Colors.lighter,
     },
@@ -113,6 +115,7 @@ const custom = StyleSheet.create({
     },
     icon: {
         width: '13%',
+        marginTop: '-4%',
         paddingLeft: 10,
     },
 });

@@ -21,8 +21,8 @@ export const Container = styled.View`
 
 export const ContentMain = styled.View`
     flex: 1;
-    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.white};
-    margin-top: ${props => props.marginTop ? props.marginTop : '140px'};
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.transparent};
+    margin-top: ${props => props.marginTop ? props.marginTop : '80px'};
     margin-left: ${props => props.marginLeft ? props.marginLeft : '0px'};
     margin-right: ${props => props.marginRight ? props.marginRight : '0px'};
     margin-bottom: ${props => props.marginBottom ? props.marginBottom : '0px'};
@@ -74,7 +74,7 @@ export const ContainerColumn = styled.View`
 export const ContainerScroll = styled.ScrollView`
     flex: 1;
     width: ${props => width};
-    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.white};
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.transparent};
     padding-top: ${props => props.paddingTop ? props.paddingTop : '0px'};
     padding-left: ${props => props.paddingLeft ? props.paddingLeft : '0px'};
     padding-right: ${props => props.paddingRight ? props.paddingRight : '0px'};
@@ -122,13 +122,11 @@ export const ContainerPagination = styled.View`
 `;
 
 export const Hr = styled.View`
-    border-bottom-width: 0.5;
+    border-bottom-width: 0.5px;
     border-color: ${props => Colors.light};
-    padding: 5px;
     marginLeft: 15%;
     marginRight: 15%;
-    marginTop: 4.5%;
-    marginBottom: 4.5%;
+    marginBottom: 5%;
 `;
 
 export const Card = styled.View`
@@ -199,7 +197,7 @@ export const Button = styled.TouchableOpacity`
 
 export const ButtonFull = styled.TouchableOpacity`
     width: 100%;
-    height: 60px;
+    height: 45px;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     padding: ${props => props.padding ? props.padding : '8px'};
 `;
