@@ -11,7 +11,8 @@ const IconLabel = ({ icon, label, title }) => {
             <View style={[styles.container,
             {
                 marginLeft: icon ? "4.5%" : "1.5%",
-                marginBottom: icon ? 0 : "4.5%"
+                marginBottom: icon ? 0 : "4.5%",
+                marginTop: icon ? 0 : "15%",
             }]}>
                 {icon &&
                     <View style={styles.userIcon}>
@@ -35,10 +36,10 @@ const IconLabel = ({ icon, label, title }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
     },
     userIcon: {
-        width: '16%',
+        width: '18%',
         height: "42%",
         justifyContent: "center",
         alignItems: "center",

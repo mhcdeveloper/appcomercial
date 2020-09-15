@@ -61,6 +61,7 @@ export default Search = ({ filter }) => {
                 <TextInput
                     style={custom.inputText}
                     placeholder={filter.title}
+                    autoCapitalize={false}
                     onChangeText={(nome) => setName(nome.toUpperCase())} />
                 {loading
                     ?

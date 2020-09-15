@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     containerIcon: {
         width: '18%',
-        height: 40,
+        height: "22%",
         position: 'absolute',
         justifyContent: "center",
         alignItems: "center",
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     },
     imgHeader: {
         width,
-        height: 80,
+        height: 90,
     },
     btnGradient: {
         borderRadius: 25,
