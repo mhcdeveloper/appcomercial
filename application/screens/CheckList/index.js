@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, Dimensions, ScrollView } from 'react-native';
+import { View, StatusBar, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, ContentMain, ContainerScroll } from '../../styles';
@@ -109,16 +109,9 @@ const CheckList = ({ route, navigation }) => {
     }
 
     function renderQuestionList(data) {
-        let list = separarItemScroll(data, 4);
-        return list.map((question, index) => {
+        return data.map((item, index) => {
             return (
-                <ScrollView key={index} style={{ width }}>
-                    {question.map((item, index) => {
-                        return (
-                            <QuestionItem key={index} item={item} changeAnswer={changeAnswer} />
-                        )
-                    })}
-                </ScrollView>
+                <QuestionItem key={index} item={item} changeAnswer={changeAnswer} />
             )
         });
     }
@@ -164,10 +157,8 @@ const CheckList = ({ route, navigation }) => {
                         <>
                             <IconLabel label="Checklist" title={questions.modulo} />
                             <ContainerScroll
-                                pagingEnabled={true}
                                 showsHorizontalScrollIndicator={false}
-                                showsVerticalScrollIndicator={false}
-                                horizontal>
+                                showsVerticalScrollIndicator={false}>
                                 {renderQuestionList(questions.list)}
                             </ContainerScroll>
                             <BtnFull
