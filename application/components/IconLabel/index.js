@@ -7,39 +7,43 @@ import Colors from '../../styles/Colors';
 
 const IconLabel = ({ icon, label, title }) => {
     return (
-        <>
-            <View style={[styles.container,
+        <View style={styles.container}>
+            <View style={[styles.content,
             {
-                marginLeft: icon ? "4.5%" : "1.5%",
-                marginBottom: icon ? 0 : "4.5%",
-                marginTop: icon ? 0 : "15%",
+                marginTop: icon ? 0 : "2.5%",
+                marginLeft: icon ? "4.5%" : "2.5%",
+                marginBottom: icon ? 0 : "6%",
             }]}>
                 {icon &&
                     <View style={styles.userIcon}>
-                        <Icon name="user" size={40} color={Colors.white} />
+                        <Icon name="user" size={45} color={Colors.white} />
                     </View>
                 }
                 <View style={[styles.info, { width: icon ? '80%' : '100%' }]}>
-                    <Title align="left" left="15px" font="15px">
+                    <Title align="left" left="15px" font="18px">
                         {label}
                     </Title>
-                    <Title font="18px" align="left" left="15px" weight="bold">
+                    <Title font="20px" align="left" left="15px" weight="bold">
                         {title}
                     </Title>
                 </View>
             </View>
-        </>
+            <Hr />
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        width: '100%',
+    },
+    content: {
         flexDirection: "row",
-        alignItems: "center"        
+        alignItems: "center",
     },
     userIcon: {
-        width: '19%',
-        height: "42%",
+        width: '20%',
+        height: "70%",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: Colors.light,

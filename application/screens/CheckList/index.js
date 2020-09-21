@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StatusBar, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Container, ContentMain, ContainerScroll } from '../../styles';
+import { Container, ContentMain, ContainerScroll, Content } from '../../styles';
 import Header from '../../components/Header';
 import Colors from '../../styles/Colors';
 import IconLabel from '../../components/IconLabel';
@@ -153,20 +153,27 @@ const CheckList = ({ route, navigation }) => {
                         alert={alert == 1 ? "Liberado" : "Não Liberado"}
                         message={alert == 1 ? selectedQuestion.DSLIBSIM : selectedQuestion.DSLIBNAO} />
                     :
-                    <ContentMain>
-                        <IconLabel label="Checklist" title={questions.modulo} />
-                        <ContainerScroll
-                            showsVerticalScrollIndicator={false}>
-                            {renderQuestionList(questions.list)}
-                        </ContainerScroll>
-                    </ContentMain>
+                    <>
+                        <ContentMain>
+                            <IconLabel label="Checklist" title={questions.modulo} />
+                            <Content 
+                                flex={1}
+                                marginTop="2%"
+                                marginLeft="4%">
+                                <ContainerScroll
+                                    showsVerticalScrollIndicator={false}>
+                                    {renderQuestionList(questions.list)}
+                                </ContainerScroll>
+                            </Content>
+                        </ContentMain>
+                        <BtnFull
+                            disabled={validToFinish}
+                            label="Finalizar Checklist"
+                            font="20px"
+                            onSubmit={finalizarChecklist}
+                        />
+                    </>
             }
-            <BtnFull
-                disabled={validToFinish}
-                label="Finalizar Checklist"
-                font="20px"
-                onSubmit={finalizarChecklist}
-            />
         </Container>
     )
 }

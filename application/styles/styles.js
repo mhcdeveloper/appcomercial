@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
     },
     containerIcon: {
         width: '18%',
-        height: "22%",
+        height: "55%",
         position: 'absolute',
         justifyContent: "center",
         alignItems: "center",
-        top: '-12%',
+        top: '-35%',
         right: '-0.2%',
         backgroundColor: Colors.primary,
         borderRadius: 50
@@ -50,10 +50,15 @@ const styles = StyleSheet.create({
     },
     containerHeader: {
         position: 'absolute',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.primary,
+        paddingTop: 40,
+        paddingBottom: 5,
     },
     containerRowPagination: {
         backgroundColor: Colors.regular,
@@ -63,17 +68,18 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 45,
         marginTop: 50,
     },
-    containerBlack: { 
-        position: 'absolute', 
-        top: 0, 
-        bottom: 0, 
-        left: 0, 
-        right: 0, 
-        backgroundColor: 'rgba(0, 0, 0, 0.8)' 
+    containerBlack: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)'
     },
     imgHeader: {
-        width,
-        height: Platform.OS == 'ios' ? 120 : 90,
+        width: width / 2,
+        height: Platform.OS == 'ios' ? 55 : 20,
+        resizeMode: "stretch"
     },
     btnGradient: {
         borderRadius: 25,

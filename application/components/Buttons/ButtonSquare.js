@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Colors from '../../styles/Colors';
 import { Title } from '../../styles';
@@ -20,8 +20,8 @@ export default ButtonSquare = ({ label, icon, rota, IDS025, modulo }) => {
                 dispatch(setModulo(modulo));
             }}
             activeOpacity={0.7}>
-            <Icon name={icon} size={40} color={Colors.white} />
-            <Title weight="bold" top="5px" font="18px" color={Colors.white}>{label}</Title>
+            <Icon name={icon} size={55} color={Colors.white} />
+            <Title weight="bold" top="8px" font="20px" color={Colors.white}>{label}</Title>
         </TouchableOpacity>
     )
 }

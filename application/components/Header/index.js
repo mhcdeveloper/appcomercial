@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 
-import { HEADER } from '../../assets/consts';
+import { HEADER, LOGO_EVOLOG } from '../../assets/consts';
 import styles from '../../styles/styles';
 import Colors from '../../styles/Colors';
+import Logo from '../../components/Logo';
+import { ContainerCenter } from '../../styles';
 
 export default Header = ({ back }) => {
     const navigation = useNavigation();
@@ -15,20 +17,17 @@ export default Header = ({ back }) => {
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={{
-                        position: 'absolute',
-                        top: 80,
-                        left: 15,
+                        top: '2%',
+                        left: '45%',
                         zIndex: 1000,
                     }}
-                    activeOpacity={0.7}>
-                    <Icon name="arrow-alt-circle-left" size={40} color={Colors.primary} />
+                    activeOpacity={0.5}>
+                    <Icon name="arrow-alt-circle-left" size={35} color={Colors.white} />
                 </TouchableOpacity>
             }
-            <ImageBackground
-                style={styles.imgHeader}
-                imageStyle={{ resizeMode: 'stretch' }}
-                source={HEADER}>
-            </ImageBackground>
+            <ContainerCenter>
+                <Image source={LOGO_EVOLOG} style={styles.imgHeader} />
+            </ContainerCenter>
         </View>
     )
 } 

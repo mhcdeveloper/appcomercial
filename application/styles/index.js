@@ -12,7 +12,7 @@ export const SafeContainer = styled.SafeAreaView`
 
 export const Container = styled.SafeAreaView`
     flex: 1;
-    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.white};
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     margin-top: ${props => props.marginTop ? props.marginTop : '0px'};
     margin-left: ${props => props.marginLeft ? props.marginLeft : '0px'};
     margin-right: ${props => props.marginRight ? props.marginRight : '0px'};
@@ -21,11 +21,13 @@ export const Container = styled.SafeAreaView`
 
 export const ContentMain = styled.View`
     flex: 1;
-    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.transparent};
-    margin-top: ${props => props.marginTop ? props.marginTop : '15%'};
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.white};
+    margin-top: ${props => props.marginTop ? props.marginTop : '18%'};
     margin-left: ${props => props.marginLeft ? props.marginLeft : '0px'};
     margin-right: ${props => props.marginRight ? props.marginRight : '0px'};
-    margin-bottom: ${props => props.marginBottom ? props.marginBottom : '0px'};
+    margin-bottom: ${props => props.marginBottom ? props.marginBottom : '0px'};   
+    border-top-left-radius: 40px;   
+    border-top-right-radius: 40px;   
 `;
 
 export const Content = styled.View`
@@ -123,10 +125,9 @@ export const ContainerPagination = styled.View`
 
 export const Hr = styled.View`
     border-bottom-width: 0.5px;
-    border-color: ${props => Colors.light};
-    marginLeft: 15%;
-    marginRight: 15%;
-    marginBottom: 5%;
+    border-color: ${props => Colors.light}; 
+    margin-right: 5%;
+    margin-left: 5%;
 `;
 
 export const Card = styled.View`
@@ -196,10 +197,12 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ButtonFull = styled.TouchableOpacity`
+    justifyContent: center;
+    alignItems: center;
     width: 100%;
-    height: 45px;
+    height: 50px;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
-    padding: ${props => props.padding ? props.padding : '8px'};
+    padding: ${props => props.padding ? props.padding : '8px'};    
 `;
 
 //ESTILOS DE INPUTS

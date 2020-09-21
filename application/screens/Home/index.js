@@ -37,8 +37,8 @@ const Home = ({ }) => {
                 <ContainerCenter>
                     <ButtonSquare
                         rota="Modulo"
-                        icon="check-circle"
-                        label="CheckList"
+                        icon="file-invoice"
+                        label="Hora Certa"
                         IDS025={2}
                         modulo="Hora Certa"
                     />
