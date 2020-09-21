@@ -11,7 +11,6 @@ import { getFilters } from '../../services';
 import { setFilterResponse } from '../../store/Actions/QuestionActions';
 
 export default Search = ({ filter }) => {
-    console.log(filter)
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [dados, setDados] = useState(false);
@@ -44,15 +43,16 @@ export default Search = ({ filter }) => {
     }
 
     return (
-        <View style={{ marginTop: "0.5%" }}>
+        <View>
             <ContainerRow
                 justifyContent="flex-start"
                 backgroundColor={Colors.white}
                 borderRadius={35}
                 marginLeft="5%"
                 marginRight="5%"
-                paddingLeft="2.0%"
-                paddingRight="2.0%"
+                paddingTop="3%"
+                paddingLeft="3%"
+                paddingBottom="3%"
                 borderWidth={1}
                 zIndex={100}
                 elevation={10}

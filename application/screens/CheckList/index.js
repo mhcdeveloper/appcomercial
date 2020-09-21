@@ -115,11 +115,11 @@ const CheckList = ({ route, navigation }) => {
             )
         });
     }
-
+    
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
-            <Header setMenu={(show) => handleShowMenu(show)} />
+            <Header back={true} setMenu={(show) => handleShowMenu(show)} />
             {anexo &&
                 <Camera
                     closeCamera={() => setAnexo(false)}
@@ -145,32 +145,28 @@ const CheckList = ({ route, navigation }) => {
                 ?
                 <Loading label="Gravando seu checklist..." />
                 :
-                <ContentMain>
-                    {alert ?
-                        <AlertScreen
-                            handleSubmit={() => navigation.navigate('Modulo')}
-                            icon={alert == 1 ? "check-circle" : "exclamation-circle"}
-                            color={alert == 1 ? Colors.green : Colors.red}
-                            alert={alert == 1 ? "Liberado" : "Não Liberado"}
-                            message={alert == 1 ? selectedQuestion.DSLIBSIM : selectedQuestion.DSLIBNAO} />
-                        :
-                        <>
-                            <IconLabel label="Checklist" title={questions.modulo} />
-                            <ContainerScroll
-                                showsHorizontalScrollIndicator={false}
-                                showsVerticalScrollIndicator={false}>
-                                {renderQuestionList(questions.list)}
-                            </ContainerScroll>
-                            <BtnFull
-                                disabled={validToFinish}
-                                label="Finalizar Checklist"
-                                font="20px"
-                                onSubmit={finalizarChecklist}
-                            />
-                        </>
-                    }
-                </ContentMain>
+                alert ?
+                    <AlertScreen
+                        handleSubmit={() => navigation.navigate('Modulo')}
+                        icon={alert == 1 ? "check-circle" : "exclamation-circle"}
+                        color={alert == 1 ? Colors.green : Colors.red}
+                        alert={alert == 1 ? "Liberado" : "Não Liberado"}
+                        message={alert == 1 ? selectedQuestion.DSLIBSIM : selectedQuestion.DSLIBNAO} />
+                    :
+                    <ContentMain>
+                        <IconLabel label="Checklist" title={questions.modulo} />
+                        <ContainerScroll
+                            showsVerticalScrollIndicator={false}>
+                            {renderQuestionList(questions.list)}
+                        </ContainerScroll>
+                    </ContentMain>
             }
+            <BtnFull
+                disabled={validToFinish}
+                label="Finalizar Checklist"
+                font="20px"
+                onSubmit={finalizarChecklist}
+            />
         </Container>
     )
 }

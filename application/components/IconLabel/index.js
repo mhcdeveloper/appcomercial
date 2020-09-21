@@ -28,7 +28,6 @@ const IconLabel = ({ icon, label, title }) => {
                     </Title>
                 </View>
             </View>
-            <Hr />
         </>
     )
 }
@@ -36,10 +35,10 @@ const IconLabel = ({ icon, label, title }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "center"        
     },
     userIcon: {
-        width: '18%',
+        width: '19%',
         height: "42%",
         justifyContent: "center",
         alignItems: "center",

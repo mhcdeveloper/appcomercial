@@ -18,7 +18,7 @@ export default Header = ({ back }) => {
                         position: 'absolute',
                         top: 80,
                         left: 15,
-                        zIndex: 100,
+                        zIndex: 1000,
                     }}
                     activeOpacity={0.7}>
                     <Icon name="arrow-alt-circle-left" size={40} color={Colors.primary} />

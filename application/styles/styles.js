@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 import Colors from './Colors';
 
 const { width, height } = Dimensions.get('window');
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     },
     imgHeader: {
         width,
-        height: 90,
+        height: Platform.OS == 'ios' ? 120 : 90,
     },
     btnGradient: {
         borderRadius: 25,

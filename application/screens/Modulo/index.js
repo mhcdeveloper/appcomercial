@@ -12,20 +12,17 @@ import { useDispatch } from 'react-redux';
 import { setModulo, setQuestionList, setFilters } from '../../store/Actions/QuestionActions';
 import { getUser } from '../../utils';
 
-const Modulo = ({ navigation }) => {
+const Modulo = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState({});
-    const [loadingChecklist, setLoadingChecklist] = useState(false);
-    const [modulos, setModulos] = useState([]);
-    const [moduloSelecionado, setModuloSelecionado] = useState(false);
     const [formularios, setFormularios] = useState([]);
 
     useEffect(() => {
-        listModulos();
+        handleFormularios();
         getUserAuth();
         navigation.addListener('focus', () => {
-            listModulos(); 
+            handleFormularios();
             setFormularios([]);
         });
     }, []);
@@ -35,45 +32,31 @@ const Modulo = ({ navigation }) => {
         setUser(user);
     }
 
-    async function listModulos() {
-        setLoading(true);
-        getModulos()
-            .then(modulos => {
-                setModulos(modulos);
-                setLoading(false);
-            })
-            .catch(err => setLoading(false));
-    }
-
-    async function handleChangeModulo(modulo, index) {
-        setLoadingChecklist(true);
-        dispatch(setModulo(modulos[index].label));
-        setModuloSelecionado(modulos[index].label);
-        getChecklist({ IDS025: modulo })
+    async function handleFormularios() {
+        const { IDS025 } = route.params;
+        await getChecklist({ IDS025 })
             .then(data => {
                 setFormularios(data);
-                setLoading(false);
                 setLoadingChecklist(false);
                 if (data.length == 1) {
                     dispatch(setFilters(data[0].filter));
                     dispatch(setQuestionList(data[0].questions));
-                    if(data[0].filter.length == 0) {
+                    if (data[0].filter.length == 0) {
                         navigation.navigate('CheckList');
                     } else {
                         navigation.navigate('Filter');
                     }
-                }                
+                }
             })
             .catch(err => {
                 setLoading(false);
-                setLoadingChecklist(false);
             });
     }
 
     async function handleQuestion(value, index) {
         dispatch(setFilters(formularios[index].filter));
         dispatch(setQuestionList(formularios[index].questions));
-        if(formularios[index].filter.length == 0) {
+        if (formularios[index].filter.length == 0) {
             navigation.navigate('CheckList');
         } else {
             navigation.navigate('Filter');
@@ -83,23 +66,21 @@ const Modulo = ({ navigation }) => {
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
-            <Header setMenu={(show) => handleShowMenu(show)} />
+            <Header back={true} setMenu={(show) => handleShowMenu(show)} />
             {loading
                 ?
-                <Loading label="Carregando módulos" />
+                <Loading label="Carregando formulários." />
                 :
                 <ContentMain>
                     <IconLabel icon="true" label="Bem Vindo," title={user.NMUSUARI} />
-                    <ComboBox placeholder="Selecione o modulo" options={modulos} onChange={handleChangeModulo} />
-                    {loadingChecklist && <ActivityIndicator size="large" color={Colors.primary} />}
                     {formularios.length > 0
                         ?
                         <ComboBox
-                            placeholder="Selecione o Checklist"
+                            placeholder="Selecione o Formulário"
                             options={formularios}
                             onChange={handleQuestion} />
                         :
-                        moduloSelecionado && <Title font="16px" top="5%">Nenhum formulário encontrado</Title>
+                        <Title font="20px" top="5%">Nenhum formulário encontrado</Title>
                     }
                 </ContentMain>
             }

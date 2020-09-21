@@ -5,13 +5,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../styles/Colors';
 import { Title } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { setModulo } from '../../store/Actions/QuestionActions';
 
-export default ButtonSquare = ({ label, icon, rota, sublabel }) => {
+export default ButtonSquare = ({ label, icon, rota, IDS025, modulo }) => {
+    const dispatch = useDispatch();
     const { navigate } = useNavigation();
+
     return (
         <TouchableOpacity
             style={styles.container}
-            onPress={() => navigate(`${rota}`)}
+            onPress={() => {
+                navigate(`${rota}`, { IDS025 });
+                dispatch(setModulo(modulo));
+            }}
             activeOpacity={0.7}>
             <Icon name={icon} size={40} color={Colors.white} />
             <Title weight="bold" top="5px" font="18px" color={Colors.white}>{label}</Title>

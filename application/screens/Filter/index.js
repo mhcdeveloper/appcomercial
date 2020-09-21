@@ -32,21 +32,21 @@ const Filter = ({ navigation }) => {
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
-            <Header setMenu={(show) => handleShowMenu(show)} />
+            <Header back={true} setMenu={(show) => handleShowMenu(show)} />
             <ContentMain>
                 <IconLabel icon="true" label="Bem Vindo," title={user.NMUSUARI} />
-                <ScrollView>
+                <ScrollView contentContainerStyle={{ flex: 1 }}>
                     {questions.filters.map((filter, index) => (
                         <Search key={index} filter={filter} />
                     ))}
                 </ScrollView>
-                <BtnFull
-                    disabled={validBtn}
-                    label="Prosseguir"
-                    font="20px"
-                    onSubmit={handleNext}
-                />
             </ContentMain>
+            <BtnFull
+                disabled={validBtn}
+                label="Prosseguir"
+                font="20px"
+                onSubmit={handleNext}
+            />
         </Container>
     )
 }

@@ -7,7 +7,7 @@ import Colors from '../../styles/Colors';
 import IconLabel from '../../components/IconLabel';
 import ButtonSquare from '../../components/Buttons/ButtonSquare';
 import BtnFull from '../../components/Buttons/BtnFull';
-import { removeUser, getUser, storeUser } from '../../utils';
+import { removeUser, getUser } from '../../utils';
 import { AuthContext } from '../../Context';
 
 const Home = ({ }) => {
@@ -35,13 +35,19 @@ const Home = ({ }) => {
             <ContentMain>
                 <IconLabel icon="true" label="Bem Vindo," title={user.NMUSUARI} />
                 <ContainerCenter>
-                    <ButtonSquare rota="Modulo" icon="check-circle" label="CheckList" />
+                    <ButtonSquare
+                        rota="Modulo"
+                        icon="check-circle"
+                        label="CheckList"
+                        IDS025={2}
+                        modulo="Hora Certa"
+                    />
                 </ContainerCenter>
-                <BtnFull
-                    onSubmit={handleSubmit}
-                    label="Sair"
-                    font="20px" />
             </ContentMain>
+            <BtnFull
+                onSubmit={handleSubmit}
+                label="Sair"
+                font="20px" />
         </Container>
     )
 }

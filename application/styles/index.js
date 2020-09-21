@@ -10,7 +10,7 @@ export const SafeContainer = styled.SafeAreaView`
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.transparent};    
 `;
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
     flex: 1;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.white};
     margin-top: ${props => props.marginTop ? props.marginTop : '0px'};
@@ -22,7 +22,7 @@ export const Container = styled.View`
 export const ContentMain = styled.View`
     flex: 1;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.transparent};
-    margin-top: ${props => props.marginTop ? props.marginTop : '80px'};
+    margin-top: ${props => props.marginTop ? props.marginTop : '15%'};
     margin-left: ${props => props.marginLeft ? props.marginLeft : '0px'};
     margin-right: ${props => props.marginRight ? props.marginRight : '0px'};
     margin-bottom: ${props => props.marginBottom ? props.marginBottom : '0px'};

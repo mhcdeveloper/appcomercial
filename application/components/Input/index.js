@@ -37,9 +37,9 @@ function Input({ color, icon, name, label, ...rest }) {
                 borderWidth={1}
                 borderRadius={40}
                 borderColor={Colors.lighter}
-                paddingTop="3px"
-                paddingBottom="3px"
-                marginBottom="10px"
+                paddingTop="4%"
+                paddingBottom="3%"
+                marginBottom="1.5%"
                 borderBottomColor={color}
                 justifyContent="flex-start">
                 {icon && <Icon name={icon} size={28} color={color} style={{ paddingLeft: 20, paddingRight: 10 }} />}
@@ -47,7 +47,7 @@ function Input({ color, icon, name, label, ...rest }) {
                     ref={inputRef} 
                     defaultValue={defaultValue} 
                     {...rest} 
-                    style={{ width: '80%', fontSize: 18, color, paddingLeft: 35 }} />
+                    style={{ width: '100%', fontSize: 18, color, paddingLeft: '8%' }} />
             </ContainerRow>
         </>
     )
