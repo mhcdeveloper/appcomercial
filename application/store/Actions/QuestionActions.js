@@ -9,11 +9,18 @@ import {
     SET_RESPONSE_ITEM, 
     RESET_RESPONSE,
     SET_FILTERS,
-    SET_FILTER_RESPONSE 
+    SET_FILTER_RESPONSE, 
+    RESET_FILTER_RESPONSE, 
+    SET_CARGA 
 } from '../consts';
 
 export const setModulo = (payload) => ({
     type: SET_MODULO,
+    payload
+});
+
+export const setCarga = (payload) => ({
+    type: SET_CARGA,
     payload
 });
 
@@ -65,4 +72,8 @@ export const setFilters = (payload) => ({
 export const setFilterResponse = (payload) => ({
     type: SET_FILTER_RESPONSE,
     payload
+});
+
+export const resetFilterResponse = () => ({
+    type: RESET_FILTER_RESPONSE
 });

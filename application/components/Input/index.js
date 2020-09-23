@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { ContainerRow } from '../../styles';
 import Colors from '../../styles/Colors';
+import { Platform } from 'react-native';
 
 function Input({ color, icon, name, label, ...rest }) {
     const inputRef = useRef(null);
@@ -36,11 +37,10 @@ function Input({ color, icon, name, label, ...rest }) {
                 backgroundColor={Colors.transparent}
                 borderWidth={1}
                 borderRadius={40}
-                borderColor={Colors.lighter}
-                paddingTop="4%"
-                paddingBottom="3%"
+                borderColor={color}
+                paddingTop={Platform.OS == 'ios' ? "4%" : "0.2%"}
+                paddingBottom={Platform.OS == 'ios' ? "3%" : "1%"}
                 marginBottom="1.5%"
-                borderBottomColor={color}
                 justifyContent="flex-start">
                 {icon && <Icon name={icon} size={28} color={color} style={{ paddingLeft: 20, paddingRight: 10 }} />}
                 <TextInput

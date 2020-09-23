@@ -36,18 +36,21 @@ const IconLabel = ({ icon, label, title }) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
+        marginBottom: 20
     },
     content: {
         flexDirection: "row",
         alignItems: "center",
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     userIcon: {
-        width: '20%',
-        height: "70%",
+        width: 80,
+        height: 80,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: Colors.light,
-        borderRadius: 100
+        borderRadius: 40
     },
     info: {
         width: '80%',

@@ -25,6 +25,27 @@ export const getFilters = async (sql, name) => {
     });
 }
 
+export const getCargaInfo = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const source = CancelToken.source();
+            let response = null;
+            setTimeout(() => {
+                if (response === null) {
+                    source.cancel();
+                }
+            }, 14000);
+            response = await api.get(`/api/mobile/checklist/buscarCargaInfo/${data.IDG046}`).then(async info => {
+                resolve(info);
+            }).catch(err => {
+                reject(false);
+            })
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 export const getModulos = async () => {
     return new Promise(async (resolve, reject) => {
         try {

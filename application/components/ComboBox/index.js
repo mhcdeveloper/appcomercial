@@ -26,11 +26,14 @@ const ComboBox = ({ options, placeholder, onChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
-    margin: "0.1%",
+    height: 50,
+    alignItems: 'center',    
     marginLeft: "5%",
     marginRight: "5%",
-    marginBottom: "2%",
+    paddingTop: "1%",
+    paddingRight: "1%",
+    paddingLeft: "2%",
+    paddingBottom: "2%",
     alignItems: "center",
     borderWidth: 1,
     borderColor: Colors.light,

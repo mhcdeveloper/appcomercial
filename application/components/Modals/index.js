@@ -36,8 +36,6 @@ export default ModalAlert = ({ closeModal, takePicture, handleQuestion, item, ty
             validAnexo = SNFOTONE == 0 ? false : true;
         }
 
-        console.log(validFoto, validText, item.SNFOTOPO)
-
         return (
             <ContainerModal backgroundColor={Colors.white}>
                 <TouchableOpacity

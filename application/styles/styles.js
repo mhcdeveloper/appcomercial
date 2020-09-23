@@ -2,6 +2,8 @@ import { StyleSheet, Dimensions, Platform } from 'react-native';
 import Colors from './Colors';
 
 const { width, height } = Dimensions.get('window');
+const isIos = Platform.OS == 'ios';
+
 const styles = StyleSheet.create({
     containerCenter: {
         flex: 1,
@@ -20,11 +22,11 @@ const styles = StyleSheet.create({
     },
     containerIcon: {
         width: '18%',
-        height: "55%",
+        height: isIos ? "55%" : '25%',
         position: 'absolute',
         justifyContent: "center",
         alignItems: "center",
-        top: '-35%',
+        top: isIos ? '-35%' : '-15%',
         right: '-0.2%',
         backgroundColor: Colors.primary,
         borderRadius: 50
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: Colors.primary,
-        paddingTop: 40,
+        paddingTop: isIos ? 40 : '0.4%',
         paddingBottom: 5,
     },
     containerRowPagination: {
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     },
     imgHeader: {
         width: width / 2,
-        height: Platform.OS == 'ios' ? 55 : 20,
+        height: isIos ? 55 : 50,
         resizeMode: "stretch"
     },
     btnGradient: {

@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 
-import { HEADER, LOGO_EVOLOG } from '../../assets/consts';
+import { LOGO_EVOLOG } from '../../assets/consts';
 import styles from '../../styles/styles';
 import Colors from '../../styles/Colors';
-import Logo from '../../components/Logo';
 import { ContainerCenter } from '../../styles';
 
 export default Header = ({ back }) => {
@@ -17,7 +16,7 @@ export default Header = ({ back }) => {
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={{
-                        top: '2%',
+                        top: Platform.OS == 'ios' ? '2%' : '2.6%',
                         left: '45%',
                         zIndex: 1000,
                     }}

@@ -35,16 +35,20 @@ const CheckList = ({ route, navigation }) => {
     }, []);
 
     function resetModal() {
-        setOpen(!open);
+        setOpen(false);
         dispatch(resetImage());
         dispatch(setAnswer(''));
     }
 
     //Seta positivo ou negativo e abre o modal pra responder
     function changeAnswer(item, type) {
-        setOpen(true);
         setType(type);
         setselectedQuestion(item);
+        if (item.SNFOTOPO == 0 && item.SNTEXTPO == 0 && type == 1) {
+            handleQuestion();
+        } else {
+            setOpen(true);
+        }
     }
 
     //Seta o canhoto na store e abre o modal de novo
@@ -61,15 +65,17 @@ const CheckList = ({ route, navigation }) => {
 
     //Grava a resposta da pergunta
     function handleQuestion() {
-        const { filterResponse } = questions;
-        let DSVALUE = filterResponse.length > 0 ? filterResponse.filter(filter => filter.IDS007 == selectedQuestion.IDS007)[0].d.ID : null;
+        const { filterResponse, carga } = questions;
+
+        let DSVALUE = filterResponse.length > 0 ? filterResponse.filter(filter => filter.IDS007 == selectedQuestion.IDS007)[0].params.ID : null;
         let answer = {
             IDS001,
             IDG114: selectedQuestion.IDG114,
             SNRESULT: type, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
             INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? type == 0 ? true : false : false,
-            DSVALUE
+            DSVALUE,
+            IDG046: carga
         }
         dispatch(setResponse(answer));
         dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: type }));
@@ -115,7 +121,7 @@ const CheckList = ({ route, navigation }) => {
             )
         });
     }
-    
+
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
@@ -156,7 +162,7 @@ const CheckList = ({ route, navigation }) => {
                     <>
                         <ContentMain>
                             <IconLabel label="Checklist" title={questions.modulo} />
-                            <Content 
+                            <Content
                                 flex={1}
                                 marginTop="2%"
                                 marginLeft="4%">

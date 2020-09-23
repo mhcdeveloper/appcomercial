@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, ActivityIndicator } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import { Container, ContentMain, Title } from '../../styles';
 import Header from '../../components/Header';
 import IconLabel from '../../components/IconLabel';
 import Colors from '../../styles/Colors';
 import ComboBox from '../../components/ComboBox';
-import { getModulos, getChecklist } from '../../services';
+import { getChecklist } from '../../services';
 import Loading from '../../components/Loading';
 import { useDispatch } from 'react-redux';
-import { setModulo, setQuestionList, setFilters } from '../../store/Actions/QuestionActions';
+import { setQuestionList, setFilters } from '../../store/Actions/QuestionActions';
 import { getUser } from '../../utils';
 
 const Modulo = ({ navigation, route }) => {
@@ -22,6 +22,7 @@ const Modulo = ({ navigation, route }) => {
         handleFormularios();
         getUserAuth();
         navigation.addListener('focus', () => {
+            setLoading(true);
             handleFormularios();
             setFormularios([]);
         });

@@ -15,7 +15,10 @@ export default Welcome = ({ }) => {
             if (user) {
                 await login(user).then(_ => {
                     signIn();
-                }).catch(err => alert('Não foi possivel fazer a autenticação'))
+                }).catch(err => {
+                    alert('Não foi possivel fazer a autenticação')
+                    signOut();
+                });
             } else {
                 signOut();
             }

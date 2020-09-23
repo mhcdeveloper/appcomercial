@@ -1,15 +1,14 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Form } from '@unform/mobile';
-import FingerprintScanner from 'react-native-fingerprint-scanner';
 
 import Btn from '../Buttons';
 import Input from '../Input';
 import Colors from '../../styles/Colors';
 import { useNavigation } from '@react-navigation/native';
-import { login, loginWithDigital } from '../../services/loginService';
+import { login } from '../../services/loginService';
 import { ActivityIndicator, Alert } from 'react-native';
 import { Content, Title } from '../../styles';
-import { storeUserInfo, getUserInfo } from '../../utils';
+import { storeUserInfo } from '../../utils';
 import { AuthContext } from '../../Context';
 
 export default function SignIn() {

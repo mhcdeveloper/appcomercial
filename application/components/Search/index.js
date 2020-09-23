@@ -50,7 +50,7 @@ export default Search = ({ filter }) => {
                 borderRadius={35}
                 marginLeft="5%"
                 marginRight="5%"
-                paddingTop="3%"
+                paddingTop="0.6%"
                 paddingLeft="3%"
                 paddingBottom="3%"
                 borderWidth={1}
@@ -61,7 +61,7 @@ export default Search = ({ filter }) => {
                 <TextInput
                     style={custom.inputText}
                     placeholder={filter.title}
-                    autoCapitalize={false}
+                    autoCapitalize={false}                    
                     onChangeText={(nome) => setName(nome.toUpperCase())} />
                 {loading
                     ?

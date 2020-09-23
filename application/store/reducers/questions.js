@@ -10,11 +10,14 @@ import {
     SET_RESPONSE_ITEM ,
     RESET_RESPONSE,
     SET_FILTERS,
-    SET_FILTER_RESPONSE
+    SET_FILTER_RESPONSE,
+    RESET_FILTER_RESPONSE,
+    SET_CARGA
 } from "../consts";
 
 const INITIAL_STATE = {
     modulo: '',
+    carga: '',
     DSTEXTO: '',
     images: [],   
     response: [],   
@@ -31,6 +34,11 @@ export default function questions(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 modulo: payload
+            }
+        case SET_CARGA:
+            return {
+                ...state,
+                carga: payload
             }
         case SET_ANSWER:
             return {
@@ -97,6 +105,11 @@ export default function questions(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 filterResponse: [...payload]
+            }
+        case RESET_FILTER_RESPONSE:
+            return {
+                ...state,
+                filterResponse: []
             }
         default:
             return state;

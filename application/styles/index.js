@@ -193,7 +193,7 @@ export const Button = styled.TouchableOpacity`
     border-radius: ${props => props.border ? props.border : '40px'};;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Colors.primary};
     padding: ${props => props.padding ? props.padding : '8px'};
-    margin: 10px;    
+    margin: 1%;    
 `;
 
 export const ButtonFull = styled.TouchableOpacity`
