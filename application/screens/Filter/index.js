@@ -62,7 +62,6 @@ const Filter = ({ navigation }) => {
         navigation.navigate('CheckList');
     }
 
-    console.log(questions)
     return (
         <Container>
             <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />

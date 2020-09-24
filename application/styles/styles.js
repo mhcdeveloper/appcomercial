@@ -21,12 +21,12 @@ const styles = StyleSheet.create({
         zIndex: 5
     },
     containerIcon: {
-        width: '18%',
-        height: isIos ? "55%" : '25%',
+        width: 50,
+        height: 50,
         position: 'absolute',
         justifyContent: "center",
         alignItems: "center",
-        top: isIos ? '-35%' : '-15%',
+        top: isIos ? '-25%' : '-5%',
         right: '-0.2%',
         backgroundColor: Colors.primary,
         borderRadius: 50

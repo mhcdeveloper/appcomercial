@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, Dimensions } from 'react-native';
+import { StatusBar } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, ContentMain, ContainerScroll, Content } from '../../styles';
@@ -12,11 +12,9 @@ import AlertScreen from '../../components/AlertScreen';
 import ModalAlert from '../../components/Modals';
 import Camera from '../../components/Camera';
 import { setImage, resetImage, setAnswer, setResponse, setResponseItem, setResetResponse, setQuestionList } from '../../store/Actions/QuestionActions';
-import { separarItemScroll, getUser } from '../../utils';
+import { getUser } from '../../utils';
 import { salvarResposta, salvarAnexosResposta } from '../../services';
 import Loading from '../../components/Loading';
-
-const width = Dimensions.get('window').width;
 
 const CheckList = ({ route, navigation }) => {
     const dispatch = useDispatch();
@@ -24,7 +22,7 @@ const CheckList = ({ route, navigation }) => {
     const [IDS001, setIDS001] = useState(false);
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState(false);
-    const [type, setType] = useState('');
+    const [typeSelect, setTypeSelect] = useState('');
     const [open, setOpen] = useState(false);
     const [selectedQuestion, setselectedQuestion] = useState(false);
     const [anexo, setAnexo] = useState(false);
@@ -34,6 +32,15 @@ const CheckList = ({ route, navigation }) => {
         getUser().then(user => setIDS001(user.IDS001));
     }, []);
 
+    useEffect(() => {
+        console.log(selectedQuestion)
+        if (selectedQuestion.SNFOTOPO == 0 && selectedQuestion.SNTEXTPO == 0 && selectedQuestion.type == 1) {
+            handleQuestion();
+        } else if (selectedQuestion.type == 1) {
+            setOpen(true);
+        }
+    }, [selectedQuestion])
+    
     function resetModal() {
         setOpen(false);
         dispatch(resetImage());
@@ -42,11 +49,10 @@ const CheckList = ({ route, navigation }) => {
 
     //Seta positivo ou negativo e abre o modal pra responder
     function changeAnswer(item, type) {
-        setType(type);
+        item.type = type;
+        setTypeSelect(type);
         setselectedQuestion(item);
-        if (item.SNFOTOPO == 0 && item.SNTEXTPO == 0 && type == 1) {
-            handleQuestion();
-        } else {
+        if (type == 0) {
             setOpen(true);
         }
     }
@@ -71,14 +77,14 @@ const CheckList = ({ route, navigation }) => {
         let answer = {
             IDS001,
             IDG114: selectedQuestion.IDG114,
-            SNRESULT: type, //Positivo ou negativo
+            SNRESULT: typeSelect, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
-            INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? type == 0 ? true : false : false,
+            INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? typeSelect == 0 ? true : false : false,
             DSVALUE,
             IDG046: carga
         }
         dispatch(setResponse(answer));
-        dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: type }));
+        dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: typeSelect }));
         resetModal();
     }
 
@@ -138,7 +144,7 @@ const CheckList = ({ route, navigation }) => {
             }
             {open &&
                 <ModalAlert
-                    type={type}
+                    type={typeSelect}
                     item={selectedQuestion}
                     takePicture={() => {
                         setAnexo(true);
