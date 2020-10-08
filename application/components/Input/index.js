@@ -38,8 +38,8 @@ function Input({ color, icon, name, label, ...rest }) {
                 borderWidth={1}
                 borderRadius={40}
                 borderColor={color}
-                paddingTop={Platform.OS == 'ios' ? "4%" : "0.2%"}
-                paddingBottom={Platform.OS == 'ios' ? "3%" : "1%"}
+                paddingTop={Platform.OS == 'ios' ? "1%" : "0.2%"}
+                paddingBottom={Platform.OS == 'ios' ? "8%" : "1%"}
                 marginBottom="1.5%"
                 justifyContent="flex-start">
                 {icon && <Icon name={icon} size={28} color={color} style={{ paddingLeft: 20, paddingRight: 10 }} />}

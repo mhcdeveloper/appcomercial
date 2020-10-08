@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { ContainerCenter, Title } from '../../styles';
 import Colors from '../../styles/Colors';
 import BtnFull from '../Buttons/BtnFull';
-import Header from '../Header';
 
 const AlertScreen = ({ icon, color, message, alert, handleSubmit }) => {
     return (

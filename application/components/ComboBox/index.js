@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Platform } from "react-native";
 import { View, Picker, StyleSheet } from "react-native";
 import Colors from "../../styles/Colors";
 
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     paddingLeft: "2%",
     paddingBottom: "2%",
     alignItems: "center",
-    borderWidth: 1,
+    borderWidth: Platform.OS == 'ios' ? 0 :1,
     borderColor: Colors.light,
     borderRadius: 30
   },
