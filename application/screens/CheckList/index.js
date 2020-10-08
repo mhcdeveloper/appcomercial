@@ -71,7 +71,7 @@ const CheckList = ({ route, navigation }) => {
 
     //Grava a resposta da pergunta
     function handleQuestion() {
-        const { filterResponse, carga } = questions;
+        const { filterResponse, carga, agendamento } = questions;
 
         let DSVALUE = filterResponse.length > 0 ? filterResponse.filter(filter => filter.IDS007 == selectedQuestion.IDS007)[0].params.ID : null;
         let answer = {
@@ -81,12 +81,15 @@ const CheckList = ({ route, navigation }) => {
             DSTEXTO: questions.DSTEXTO,
             INVIABILIZA: selectedQuestion.SNINVIAB == 1 ? typeSelect == 0 ? true : false : false,
             DSVALUE,
-            IDG046: carga
+            IDG046: carga,
+            IDH006: agendamento
         }
         dispatch(setResponse(answer));
         dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: typeSelect }));
         resetModal();
     }
+
+    console.log(questions.filterResponse)
 
     async function finalizarChecklist() {
         const { response, anexos } = questions;

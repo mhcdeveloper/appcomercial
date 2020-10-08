@@ -18,6 +18,7 @@ import {
 const INITIAL_STATE = {
     modulo: '',
     carga: '',
+    agendamento: '',
     DSTEXTO: '',
     images: [],   
     response: [],   
@@ -38,7 +39,8 @@ export default function questions(state = INITIAL_STATE, action) {
         case SET_CARGA:
             return {
                 ...state,
-                carga: payload
+                carga: payload.IDG046,
+                agendamento: payload.IDH006,
             }
         case SET_ANSWER:
             return {

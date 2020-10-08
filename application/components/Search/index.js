@@ -37,7 +37,7 @@ export default Search = ({ filter }) => {
     }
 
     function changeData(d) {
-        dispatch(setFilterResponse([{ IDS007: filter.IDS007, d }]));
+        dispatch(setFilterResponse([{ IDS007: filter.IDS007, params: { ID: d.ID, VALUE: d.VALUE } }]));
         setDados(false);
         setSelected(d.VALUE);
     }

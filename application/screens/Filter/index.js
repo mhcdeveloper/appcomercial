@@ -39,7 +39,7 @@ const Filter = ({ navigation }) => {
     function handleCarga(infos) {
         if (infos) {
             setInfos(infos);
-            dispatch(setCarga(infos.IDG046));
+            dispatch(setCarga({ IDG046: infos.IDG046, IDH006: infos.IDH006}));
         } else {
             Alert.alert("Ocorreu um erro.", "Não foi possivel encontrar nenhuma informação da carga informada", [
                 {
@@ -75,8 +75,8 @@ const Filter = ({ navigation }) => {
                         <Content
                             marginLeft="5%"
                             marginBottom="3%">
-                            <Title align="left">Código da Carga</Title>
-                            <Title weight="bold" font="16px" left="1%" align="left" bottom="2%">{infos.IDG046}</Title>
+                            <Title align="left">Código do Agendamento</Title>
+                            <Title weight="bold" font="16px" left="1%" align="left" bottom="2%">{infos.IDH006}</Title>
                             <Hr />
                         </Content>
                         <Content
