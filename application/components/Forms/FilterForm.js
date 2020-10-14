@@ -36,7 +36,7 @@ const FilterForm = ({ handleCarga }) => {
         <Input
           name="IDG046"
           keyboardType="numeric"
-          placeholder="Código da Carga"
+          placeholder="Código do Shipment"
           autoCapitalize="none"
           color={Colors.primaryText}
           placeholderTextColor={Colors.primaryText}

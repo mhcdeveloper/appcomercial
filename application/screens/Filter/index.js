@@ -75,8 +75,8 @@ const Filter = ({ navigation }) => {
                         <Content
                             marginLeft="5%"
                             marginBottom="3%">
-                            <Title align="left">Código do Agendamento</Title>
-                            <Title weight="bold" font="16px" left="1%" align="left" bottom="2%">{infos.IDH006}</Title>
+                            <Title align="left">Código do Shipment</Title>
+                            <Title weight="bold" font="16px" left="1%" align="left" bottom="2%">{infos.CDVIAOTI}</Title>
                             <Hr />
                         </Content>
                         <Content
