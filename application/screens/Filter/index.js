@@ -9,7 +9,6 @@ import Colors from '../../styles/Colors';
 import BtnFull from '../../components/Buttons/BtnFull';
 import Search from '../../components/Search';
 import { getUser } from '../../utils';
-import Input from '../../components/Input';
 import FilterForm from '../../components/Forms/FilterForm';
 import { Alert } from 'react-native';
 import { resetFilterResponse, setCarga, setFilterResponse } from '../../store/Actions/QuestionActions';
@@ -39,7 +38,7 @@ const Filter = ({ navigation }) => {
     function handleCarga(infos) {
         if (infos) {
             setInfos(infos);
-            dispatch(setCarga({ IDG046: infos.IDG046, IDH006: infos.IDH006}));
+            dispatch(setCarga({ IDG046: infos.IDG046, IDH006: infos.IDH006 }));
         } else {
             Alert.alert("Ocorreu um erro.", "Não foi possivel encontrar nenhuma informação da carga informada", [
                 {
@@ -57,7 +56,7 @@ const Filter = ({ navigation }) => {
 
     function handleConfirm() {
         questions.filters.map(filter => {
-            dispatch(setFilterResponse([{ IDS007: filter.IDS007, params: { ID: filter.TABLEA == 'G031' ? infos.IDG031 : infos.IDG032} }]));
+            dispatch(setFilterResponse([{ IDS007: filter.IDS007, params: { ID: filter.TABLEA == 'G031' ? infos.IDG031 : infos.IDG032 } }]));
         });
         navigation.navigate('CheckList');
     }
@@ -119,10 +118,25 @@ const Filter = ({ navigation }) => {
                         <Content
                             marginLeft="5%"
                             marginBottom="3%">
-                            <Title align="left">Código da Carga</Title>
-                            <Title weight="bold" font="16px" left="1%" align="left" bottom="2%">{infos.IDG046}</Title>
+                            <Title align="left">Código do Shipment</Title>
+                            <Title weight="bold" font="16px" left="1%" align="left" bottom="2%">{infos.CDVIAOTI}</Title>
                             <Hr />
                         </Content>
+                        {questions.filters.length == 0 &&
+                            <Content
+                                marginLeft="10%"
+                                marginRight="10%">
+                                <Btn
+                                    font="20px"
+                                    label="Trocar Carga"
+                                    onSubmit={() => {
+                                        setFilter(false);
+                                        setInfos(false);
+                                    }}
+                                    backgroundColor={Colors.secondary}
+                                />
+                            </Content>
+                        }
                         {questions.filters.map((filter, index) => (
                             <Search key={index} filter={filter} />
                         ))}

@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useState } from 'react';
 import { Form } from '@unform/mobile';
 
 import Btn from '../Buttons';
 import Input from '../Input';
 import Colors from '../../styles/Colors';
 import { ActivityIndicator, Alert } from 'react-native';
-import { Content, Title } from '../../styles';
+import { Content } from '../../styles';
 import { getCargaInfo } from '../../services';
 
 const FilterForm = ({ handleCarga }) => {

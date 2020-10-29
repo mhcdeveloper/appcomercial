@@ -42,11 +42,11 @@ const Modulo = ({ navigation, route }) => {
                 if (data.length == 1) {
                     dispatch(setFilters(data[0].filter));
                     dispatch(setQuestionList(data[0].questions));
-                    if (data[0].filter.length == 0) {
-                        navigation.navigate('CheckList');
-                    } else {
+                    // if (data[0].filter.length == 0) {
+                    //     navigation.navigate('CheckList');
+                    // } else {
                         navigation.navigate('Filter');
-                    }
+                    // }
                 }
             })
             .catch(err => {
@@ -57,11 +57,11 @@ const Modulo = ({ navigation, route }) => {
     async function handleQuestion(value, index) {
         dispatch(setFilters(formularios[index].filter));
         dispatch(setQuestionList(formularios[index].questions));
-        if (formularios[index].filter.length == 0) {
-            navigation.navigate('CheckList');
-        } else {
+        // if (formularios[index].filter.length == 0) {
+        //     navigation.navigate('CheckList');
+        // } else {
             navigation.navigate('Filter');
-        }
+        // }
     }
 
     return (

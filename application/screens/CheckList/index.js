@@ -72,10 +72,10 @@ const CheckList = ({ route, navigation }) => {
     //Grava a resposta da pergunta
     function handleQuestion() {
         const { filterResponse, carga, agendamento } = questions;
-
         let DSVALUE = filterResponse.length > 0 ? filterResponse.filter(filter => filter.IDS007 == selectedQuestion.IDS007)[0].params.ID : null;
         let answer = {
             IDS001,
+            IDG112: selectedQuestion.IDG112,
             IDG114: selectedQuestion.IDG114,
             SNRESULT: typeSelect, //Positivo ou negativo
             DSTEXTO: questions.DSTEXTO,
@@ -88,8 +88,6 @@ const CheckList = ({ route, navigation }) => {
         dispatch(setResponseItem({ id: selectedQuestion.IDG113, value: typeSelect }));
         resetModal();
     }
-
-    console.log(questions.filterResponse)
 
     async function finalizarChecklist() {
         const { response, anexos } = questions;
