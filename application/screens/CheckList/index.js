@@ -33,14 +33,21 @@ const CheckList = ({ route, navigation }) => {
     }, []);
 
     useEffect(() => {
-        console.log(selectedQuestion)
-        if (selectedQuestion.SNFOTOPO == 0 && selectedQuestion.SNTEXTPO == 0 && selectedQuestion.type == 1) {
-            handleQuestion();
-        } else if (selectedQuestion.type == 1) {
-            setOpen(true);
+        if (selectedQuestion) {
+            handleValidItem();
         }
     }, [selectedQuestion])
-    
+
+    function handleValidItem() {
+        if (selectedQuestion.SNFOTOPO == 0 && selectedQuestion.SNTEXTPO == 0 && selectedQuestion.type == 1) {
+            handleQuestion();
+        } else if (selectedQuestion.SNFOTONE == 0 && selectedQuestion.SNTEXTNE == 0 && selectedQuestion.type == 0) {
+            handleQuestion();
+        } else {
+            setOpen(true);
+        }
+    }
+
     function resetModal() {
         setOpen(false);
         dispatch(resetImage());
@@ -52,9 +59,7 @@ const CheckList = ({ route, navigation }) => {
         item.type = type;
         setTypeSelect(type);
         setselectedQuestion(item);
-        if (type == 0) {
-            setOpen(true);
-        }
+        handleValidItem();
     }
 
     //Seta o canhoto na store e abre o modal de novo

@@ -1,4 +1,4 @@
-package com.comercial;
+package com.evolog.checklist;
 
 import android.app.Application;
 import android.content.Context;

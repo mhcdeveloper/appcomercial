@@ -1,4 +1,4 @@
-package com.comercial;
+package com.evolog.checklist;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "comercial";
+    return "checklist";
   }
 }
